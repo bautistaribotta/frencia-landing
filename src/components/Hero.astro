@@ -13,16 +13,17 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
 <section class="relative isolate flex min-h-[56rem] flex-col max-[900px]:min-h-0" id="inicio" aria-labelledby="hero-titulo">
   <Fondo variante="flanco" />
 
-  <div class={contenedor}>
-    <header
-      class="glass glass-denso relative z-3 mt-6 flex items-center justify-between gap-4 rounded-pill py-3 pr-3 pl-6 max-[560px]:pl-[18px]"
-    >
+  <!-- Barra angosta y centrada; el selector de tema va suelto arriba a la derecha.
+       Debajo de 900px la barra se alinea a la izquierda para dejarle lugar,
+       y debajo de 700px queda solo el logo. -->
+  <div class:list={[contenedor, 'relative z-3 mt-6 flex items-center justify-between gap-4 min-[900px]:justify-center']}>
+    <header class="glass glass-denso flex w-fit items-center gap-6 rounded-pill py-1.5 pr-1.5 pl-6 max-[700px]:py-3 max-[700px]:pr-6">
       <a class="marca no-underline" href="#inicio" aria-label="Frencia, inicio">FRENCIA.</a>
-      <nav class="flex gap-1 max-[900px]:hidden" aria-label="Secciones">
+      <nav class="flex gap-1 max-[700px]:hidden" aria-label="Secciones">
         {
           [
             ['#historia', 'Nuestra historia'],
-            ['#que-hace', 'Qué hace'],
+            ['#aplicacion', 'Aplicación'],
             ['#contacto', 'Contacto'],
           ].map(([href, texto]) => (
             <a
@@ -34,16 +35,10 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
           ))
         }
       </nav>
-      <div class="flex items-center gap-2.5">
-        <SelectorTema />
-        <a
-          class="glass inline-flex h-(--control-h-md) items-center justify-center rounded-md px-[18px] text-sm leading-none font-semibold text-fg-primary no-underline transition-colors duration-(--dur-base) ease-out hover:bg-surface-card-elevated active:scale-(--press-scale) max-[560px]:hidden"
-          href="https://frencia.fit"
-        >
-          Entrar
-        </a>
-      </div>
     </header>
+    <div class="glass glass-denso rounded-pill p-1.5 min-[900px]:absolute min-[900px]:right-(--pad-pagina)">
+      <SelectorTema />
+    </div>
   </div>
 
   <div
