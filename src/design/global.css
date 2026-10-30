@@ -1,0 +1,111 @@
+/* ============================================================
+   Frencia · Landing · base global
+   Tokens de Lume (tokens/tokens.css, copia de frencia-web, que a su
+   vez copia tokens.web.css del design system: no se edita a mano) y
+   el puente a Tailwind. El tema sale de data-theme en <html>; sin
+   atributo sigue al sistema.
+   ============================================================ */
+
+@import 'tailwindcss';
+@import './tokens/tokens.css';
+
+/* Los colores apuntan a los tokens semánticos, así cambian solos con el
+   tema. Los de texto van como fg-* porque Tailwind reserva --text-* para
+   tamaños y chocaría con --text-primary, --text-body, etc.
+   Las que se llaman igual que el token (--font-sans, --radius-md...) solo
+   registran la utilidad: tokens.css va sin capa y le gana al
+   `--x: var(--x)` que Tailwind emite en @layer theme. */
+@theme inline {
+  --color-bg-app: var(--bg-app);
+  --color-bg-app-deep: var(--bg-app-deep);
+  --color-stage: var(--stage-bg);
+
+  --color-surface-card: var(--surface-card);
+  --color-surface-card-elevated: var(--surface-card-elevated);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-chip: var(--surface-chip);
+  --color-surface-inset: var(--surface-inset);
+  --color-surface-signal-soft: var(--surface-signal-soft);
+  --color-glass-line: var(--glass-line);
+
+  --color-fg-primary: var(--text-primary);
+  --color-fg-secondary: var(--text-secondary);
+  --color-fg-tertiary: var(--text-tertiary);
+  --color-fg-disabled: var(--text-disabled);
+  --color-fg-on-accent: var(--text-on-accent);
+  --color-fg-on-signal: var(--text-on-signal);
+  --color-fg-inverse: var(--text-inverse);
+
+  --color-border-subtle: var(--border-subtle);
+  --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
+  --color-divider: var(--divider);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-press: var(--accent-press);
+  --color-signal: var(--signal);
+  --color-signal-press: var(--signal-press);
+  --color-signal-text: var(--signal-text);
+  --color-intensity: var(--intensity);
+  --color-danger: var(--danger);
+  --color-danger-text: var(--danger-text);
+  --color-focus: var(--focus-ring);
+
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-3xl: var(--radius-3xl);
+  --radius-pill: var(--radius-pill);
+
+  --shadow-sm: var(--shadow-sm);
+  --shadow-glass: var(--shadow-glass);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-halo-accent: var(--halo-accent);
+  --shadow-halo-signal: var(--halo-signal);
+
+  --ease-out: var(--ease-out);
+  --ease-in-out: var(--ease-in-out);
+}
+
+/* Roles de texto de la app (font shorthand completo). */
+@utility type-hero { font: var(--text-hero); letter-spacing: var(--ls-display); }
+@utility type-display { font: var(--text-display); letter-spacing: var(--ls-display); }
+@utility type-title { font: var(--text-title); letter-spacing: var(--ls-tight); }
+@utility type-subtitle { font: var(--text-subtitle); }
+@utility type-body { font: var(--text-body); }
+@utility type-body-sm { font: var(--text-body-sm); }
+@utility type-data { font: var(--text-data); }
+@utility type-label { font: var(--text-label); letter-spacing: var(--ls-wider); text-transform: uppercase; }
+@utility type-meta { font: var(--text-meta); }
+
+@utility glass {
+  background: var(--surface-card);
+  backdrop-filter: var(--glass-filter);
+  -webkit-backdrop-filter: var(--glass-filter);
+  box-shadow: var(--shadow-glass);
+  border: var(--hairline) solid var(--glass-line);
+}
+
+@layer base {
+  body {
+    background: var(--bg-app);
+    color: var(--text-primary);
+    font: var(--text-body);
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: var(--foco-w) solid var(--focus-ring);
+    outline-offset: var(--foco-offset);
+  }
+}
