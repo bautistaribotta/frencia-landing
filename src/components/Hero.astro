@@ -3,7 +3,6 @@ import { Image } from 'astro:assets';
 import { ArrowDown, Flame } from 'lucide-react';
 import BotonWeb from './BotonWeb.astro';
 import Fondo from './Fondo.astro';
-import SelectorTema from './SelectorTema.astro';
 import Tienda from './Tienda.astro';
 import fotoHero from '../assets/fotos/hero-sentadilla.jpg';
 
@@ -13,33 +12,8 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
 <section class="relative isolate flex min-h-[56rem] flex-col max-[900px]:min-h-0" id="inicio" aria-labelledby="hero-titulo">
   <Fondo variante="flanco" />
 
-  <!-- Barra angosta y centrada; el selector de tema va suelto arriba a la derecha.
-       Debajo de 900px la barra se alinea a la izquierda para dejarle lugar,
-       y debajo de 700px queda solo el logo. -->
-  <div class:list={[contenedor, 'relative z-3 mt-6 flex items-center justify-between gap-4 min-[900px]:justify-center']}>
-    <header class="glass glass-denso flex w-fit items-center gap-6 rounded-pill py-1.5 pr-1.5 pl-6 max-[700px]:py-3 max-[700px]:pr-6">
-      <a class="marca no-underline" href="#inicio" aria-label="Frencia, inicio">FRENCIA.</a>
-      <nav class="flex gap-1 max-[700px]:hidden" aria-label="Secciones">
-        {
-          [
-            ['#historia', 'Nuestra historia'],
-            ['#aplicacion', 'Aplicación'],
-            ['#contacto', 'Contacto'],
-          ].map(([href, texto]) => (
-            <a
-              href={href}
-              class="inline-flex h-(--hit-min) items-center rounded-pill px-3.5 text-sm font-medium text-fg-secondary no-underline transition-colors duration-(--dur-base) ease-out hover:bg-surface-chip hover:text-fg-primary"
-            >
-              {texto}
-            </a>
-          ))
-        }
-      </nav>
-    </header>
-    <div class="glass glass-denso rounded-pill p-1.5 min-[900px]:absolute min-[900px]:right-(--pad-pagina)">
-      <SelectorTema />
-    </div>
-  </div>
+  <!-- Lugar de la barra fija (Barra.astro): 24px de margen + 56px de barra. -->
+  <div class="h-20" aria-hidden="true"></div>
 
   <div
     class:list={[
