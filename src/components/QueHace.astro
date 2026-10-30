@@ -1,7 +1,8 @@
 ---
 import { Image } from 'astro:assets';
-import { Flame, Monitor, Smartphone } from 'lucide-react';
+import { Flame, Monitor } from 'lucide-react';
 import Fondo from './Fondo.astro';
+import capturaApp from '../assets/fotos/app-inicio.jpg';
 import fotoCardio from '../assets/fotos/cardio-carrera.jpg';
 
 const metricas = [
@@ -46,13 +47,18 @@ const metricas = [
       class="grid grid-cols-[minmax(0,0.8fr)_repeat(3,minmax(0,1fr))] grid-rows-2 gap-5 max-[1080px]:grid-cols-2 max-[1080px]:grid-rows-none max-[560px]:grid-cols-1"
     >
       <div
-        class="glass glass-denso row-span-2 flex rounded-[44px] p-3 max-[1080px]:col-span-2 max-[1080px]:row-span-1 max-[560px]:col-span-1"
+        class="glass glass-denso row-span-2 flex rounded-[44px] p-3 max-[1080px]:col-span-2 max-[1080px]:row-span-1 max-[1080px]:w-full max-[1080px]:max-w-[320px] max-[1080px]:justify-self-center max-[560px]:col-span-1"
       >
         <div
-          class="flex min-h-[420px] flex-1 flex-col items-center justify-center gap-2.5 rounded-[34px] border-[1.5px] border-dashed border-border-default bg-surface-inset p-6 text-center text-fg-tertiary max-[1080px]:min-h-80"
+          class="relative min-h-[420px] flex-1 overflow-hidden rounded-[34px] bg-surface-inset max-[1080px]:aspect-739/1511 max-[1080px]:min-h-0"
         >
-          <Smartphone aria-hidden="true" size={20} strokeWidth={1.75} />
-          <span class="rotulo">[Captura de la app]</span>
+          <Image
+            src={capturaApp}
+            alt="Pantalla de inicio de la app de Frencia con los días de la rutina Torso-Piernas y el botón para empezar el entrenamiento"
+            widths={[320, 640]}
+            sizes="(max-width: 1080px) 296px, 260px"
+            class="absolute inset-0 size-full object-cover object-top"
+          />
         </div>
       </div>
 
