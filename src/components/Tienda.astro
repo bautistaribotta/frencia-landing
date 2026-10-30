@@ -1,0 +1,28 @@
+---
+// Insignia de tienda en estado "Próximamente": no es un enlace todavía.
+// Los logos salen de simple-icons y se dibujan en el build, sin JS.
+import { siApple, siGoogleplay } from 'simple-icons';
+
+interface Props {
+  tienda: 'google-play' | 'app-store';
+}
+
+const { tienda } = Astro.props;
+const { nombre, icono } =
+  tienda === 'google-play'
+    ? { nombre: 'Google Play', icono: siGoogleplay }
+    : { nombre: 'App Store', icono: siApple };
+---
+
+<div
+  class="inline-flex h-(--control-h-lg) items-center gap-3 rounded-lg border border-dashed border-border-default bg-surface-chip pr-5 pl-4 text-fg-secondary"
+  aria-label={`${nombre}, próximamente`}
+>
+  <svg class="size-5 flex-none fill-current" viewBox="0 0 24 24" aria-hidden="true">
+    <path d={icono.path} />
+  </svg>
+  <span class="flex flex-col gap-[3px] leading-none">
+    <span class="rotulo text-(length:--fs-label-sm)">Próximamente en</span>
+    <span class="text-base font-semibold text-fg-primary">{nombre}</span>
+  </span>
+</div>

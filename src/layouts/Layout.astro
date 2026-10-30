@@ -27,6 +27,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="es_AR" />
     <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      try {
+        const tema = localStorage.getItem('tema');
+        if (tema === 'dark' || tema === 'light') document.documentElement.dataset.theme = tema;
+      } catch {}
+    </script>
   </head>
   <body>
     <slot />

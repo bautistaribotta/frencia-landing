@@ -87,12 +87,75 @@
 @utility type-label { font: var(--text-label); letter-spacing: var(--ls-wider); text-transform: uppercase; }
 @utility type-meta { font: var(--text-meta); }
 
+/* Rotulo: etiqueta corta en mayusculas sobre titulos y columnas. */
+@utility rotulo {
+  font: var(--text-label);
+  font-variation-settings: var(--vs-semi);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+@utility meta { font: var(--text-meta); letter-spacing: 0.02em; color: var(--text-tertiary); }
+
+/* Vidrio de Lume: base, fuerte (tarjeta elevada) y denso (barra, telefono). */
 @utility glass {
   background: var(--surface-card);
   backdrop-filter: var(--glass-filter);
   -webkit-backdrop-filter: var(--glass-filter);
   box-shadow: var(--shadow-glass);
   border: var(--hairline) solid var(--glass-line);
+}
+@utility glass-fuerte { background: var(--surface-card-elevated); }
+@utility glass-denso {
+  background: var(--surface-raised);
+  backdrop-filter: var(--sheet-filter);
+  -webkit-backdrop-filter: var(--sheet-filter);
+}
+
+/* Foto con borde de vidrio y grano encima. */
+@utility foto {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-2xl);
+  border: var(--hairline) solid var(--glass-line);
+  box-shadow: var(--shadow-lg);
+
+  & img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/grano.png');
+    background-size: 180px;
+    opacity: 0.35;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+}
+
+@utility marca {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-variation-settings: var(--vs-condensed);
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+@utility titulo-seccion {
+  font-family: var(--font-display);
+  font-weight: var(--fw-medium);
+  font-size: clamp(34px, 4.2vw, 56px);
+  line-height: 1.04;
+  letter-spacing: var(--ls-display);
+  text-wrap: balance;
+}
+@utility bajada {
+  font-size: clamp(17px, 1.5vw, 20px);
+  line-height: 1.5;
+  color: var(--text-secondary);
+  max-width: 34em;
 }
 
 @layer base {
@@ -107,5 +170,13 @@
   :focus-visible {
     outline: var(--foco-w) solid var(--focus-ring);
     outline-offset: var(--foco-offset);
+    border-radius: var(--radius-sm);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; }
   }
 }

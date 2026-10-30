@@ -1,0 +1,18 @@
+---
+// CTA principal hacia la app web. El hover aclara el fondo y sube el halo con
+// la misma transicion, y la flecha avanza: sin saltos de color ni de tamaño.
+import { ArrowRight } from 'lucide-react';
+---
+
+<a
+  href="https://frencia.fit"
+  class="group inline-flex h-(--control-h-lg) items-center justify-center gap-2.5 rounded-lg bg-accent px-6 text-base leading-none font-semibold text-fg-on-accent no-underline shadow-halo-accent transition-[background-color,box-shadow,transform] duration-(--dur-base) ease-out hover:bg-accent-hover hover:shadow-[0_10px_32px_color-mix(in_oklch,var(--accent)_38%,transparent)] active:scale-(--press-scale) active:bg-accent-press"
+>
+  Abrir Frencia Web
+  <ArrowRight
+    aria-hidden="true"
+    size={20}
+    strokeWidth={1.75}
+    className="transition-transform duration-(--dur-base) ease-out group-hover:translate-x-0.5"
+  />
+</a>

@@ -1,0 +1,81 @@
+---
+import { AtSign, Mail, MapPin } from 'lucide-react';
+import BotonWeb from './BotonWeb.astro';
+import Fondo from './Fondo.astro';
+import Tienda from './Tienda.astro';
+
+const enlace =
+  'inline-flex min-h-9 items-center gap-2.5 text-sm text-fg-secondary no-underline transition-colors duration-(--dur-base) hover:text-fg-primary';
+---
+
+<section class="relative isolate flex min-h-[56rem] flex-col max-[900px]:min-h-0" id="contacto" aria-labelledby="contacto-titulo">
+  <Fondo variante="cumbre" />
+
+  <div
+    class="relative z-2 mx-auto flex w-full max-w-(--contenido-max) flex-1 flex-col justify-between gap-[72px] px-(--pad-pagina) pt-[120px] pb-8 max-[900px]:px-5 max-[900px]:pt-20 max-[900px]:pb-6"
+  >
+    <div class="flex max-w-[46rem] flex-col gap-7">
+      <p class="rotulo">Empezá hoy</p>
+      <h2 class="titulo-seccion" id="contacto-titulo">Cargá la rutina que ya usás. Del resto se encarga Frencia.</h2>
+      <div class="flex flex-wrap items-center gap-3">
+        <BotonWeb />
+        <Tienda tienda="google-play" />
+        <Tienda tienda="app-store" />
+      </div>
+    </div>
+
+    <footer
+        class="glass grid grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))] gap-10 rounded-2xl p-10 max-[1080px]:grid-cols-2 max-[560px]:grid-cols-1 max-[560px]:p-7"
+      >
+        <div class="flex flex-col gap-3.5">
+          <span class="marca">FRENCIA.</span>
+          <p class="type-body-sm text-fg-secondary">
+            Cada serie cuenta. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.
+          </p>
+        </div>
+        <div class="flex flex-col gap-3.5">
+          <p class="rotulo">Contacto</p>
+          <ul class="flex flex-col gap-1">
+            <li>
+              <a class={enlace} href="mailto:hola@frencia.fit">
+                <Mail aria-hidden="true" size={16} strokeWidth={1.75} />
+                [hola@frencia.fit]
+              </a>
+            </li>
+            <li>
+              <a class={enlace} href="https://instagram.com/">
+                <AtSign aria-hidden="true" size={16} strokeWidth={1.75} />
+                [@usuario]
+              </a>
+            </li>
+            <li>
+              <span class="inline-flex min-h-9 items-center gap-2.5 text-sm text-fg-secondary">
+                <MapPin aria-hidden="true" size={16} strokeWidth={1.75} />
+                [Ciudad, País]
+              </span>
+            </li>
+          </ul>
+        </div>
+        <div class="flex flex-col gap-3.5">
+          <p class="rotulo">Producto</p>
+          <ul class="flex flex-col gap-1">
+            <li><a class={enlace} href="https://frencia.fit">Frencia Web</a></li>
+            <li><a class={enlace} href="#que-hace">Qué hace</a></li>
+            <li><a class={enlace} href="#historia">Nuestra historia</a></li>
+          </ul>
+        </div>
+        <div class="flex flex-col gap-3.5">
+          <p class="rotulo">Legal</p>
+          <ul class="flex flex-col gap-1">
+            <li><a class={enlace} href="https://frencia.fit/terminos">Términos y condiciones</a></li>
+            <li><a class={enlace} href="https://frencia.fit/privacidad">Política de privacidad</a></li>
+          </ul>
+        </div>
+      </footer>
+
+    <div class="flex flex-wrap justify-between gap-3 border-t border-divider pt-6">
+      <span class="meta">© 2026 FRENCIA · TODOS LOS DERECHOS RESERVADOS</span>
+      <span class="meta">FRENCIA.FIT</span>
+    </div>
+  </div>
+</section>

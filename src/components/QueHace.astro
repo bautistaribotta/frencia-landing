@@ -1,0 +1,82 @@
+---
+import { Image } from 'astro:assets';
+import { Flame, Monitor, Smartphone } from 'lucide-react';
+import Fondo from './Fondo.astro';
+import fotoCardio from '../assets/fotos/cardio-carrera.jpg';
+
+const metricas = [
+  { sigla: 'RIR', fuego: true, titulo: 'Repeticiones en reserva', texto: 'Cuántas te quedaron en el tanque, anotadas en cada serie.' },
+  { sigla: 'RPE', fuego: true, titulo: 'Esfuerzo percibido', texto: 'Del 1 al 10, serie por serie, para leer cómo venís.' },
+  { sigla: 'AMRAP', fuego: false, titulo: 'Todas las que puedas', texto: 'Registrás el máximo de repeticiones y lo comparás con la última vez.' },
+  { sigla: '1RM', fuego: false, titulo: 'Máximo estimado', texto: 'Tu marca calculada a partir de tus series, sin tener que probarla.' },
+  { sigla: 'kg', fuego: false, titulo: 'Tonelaje', texto: 'El volumen de cada sesión: peso por repeticiones, sumado.' },
+];
+---
+
+<section class="relative isolate flex min-h-[56rem] flex-col max-[900px]:min-h-0" id="que-hace" aria-labelledby="hace-titulo">
+  <Fondo variante="velada" />
+
+  <div
+    class="relative z-2 mx-auto flex w-full max-w-(--contenido-max) flex-1 flex-col gap-14 px-(--pad-pagina) py-[120px] max-[900px]:gap-10 max-[900px]:px-5 max-[900px]:py-20"
+  >
+    <div class="grid grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] items-end gap-12 max-[900px]:grid-cols-1 max-[900px]:gap-10">
+      <div class="flex flex-col gap-6">
+        <p class="rotulo">Qué hace Frencia</p>
+        <h2 class="titulo-seccion" id="hace-titulo">No genera rutinas. Registra las tuyas.</h2>
+        <p class="bajada">
+          Cargá la rutina que ya usás y registrá cada serie a tu manera. Frencia hace las cuentas que usan los atletas.
+        </p>
+      </div>
+      <div class="glass flex items-start gap-3 rounded-lg px-[18px] py-4">
+        <Monitor aria-hidden="true" size={20} strokeWidth={1.75} className="flex-none" />
+        <p class="type-body-sm text-fg-secondary">
+          En la web planificás y revisás tus rutinas e historial. El entrenamiento se registra en el celular.
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="grid grid-cols-[minmax(0,0.8fr)_repeat(3,minmax(0,1fr))] grid-rows-2 gap-5 max-[1080px]:grid-cols-2 max-[1080px]:grid-rows-none max-[560px]:grid-cols-1"
+    >
+      <div
+        class="glass glass-denso row-span-2 flex rounded-[44px] p-3 max-[1080px]:col-span-2 max-[1080px]:row-span-1 max-[560px]:col-span-1"
+      >
+        <div
+          class="flex min-h-[420px] flex-1 flex-col items-center justify-center gap-2.5 rounded-[34px] border-[1.5px] border-dashed border-border-default bg-surface-inset p-6 text-center text-fg-tertiary max-[1080px]:min-h-80"
+        >
+          <Smartphone aria-hidden="true" size={20} strokeWidth={1.75} />
+          <span class="rotulo">[Captura de la app]</span>
+        </div>
+      </div>
+
+      {
+        metricas.map((m) => (
+          <article class="glass flex min-h-[220px] flex-col gap-2.5 rounded-xl p-6">
+            <span class="mb-auto flex items-center gap-2 font-display text-[44px] leading-none font-semibold tracking-[-0.02em] text-(--intensity-text) [font-variation-settings:var(--vs-condensed)]">
+              {m.sigla}
+              {m.fuego && <Flame aria-hidden="true" size={20} strokeWidth={1.75} />}
+            </span>
+            <h3 class="type-subtitle tracking-[-0.01em]">{m.titulo}</h3>
+            <p class="type-body-sm text-fg-secondary">{m.texto}</p>
+          </article>
+        ))
+      }
+
+      <article
+        class="glass relative flex min-h-[220px] flex-col justify-end overflow-hidden rounded-xl after:absolute after:inset-0 after:bg-linear-to-t after:from-bg-app after:from-8% after:to-transparent after:to-75% after:content-['']"
+      >
+        <Image
+          src={fotoCardio}
+          alt="Corredor en plena carrera por una avenida"
+          widths={[400, 640, 960]}
+          sizes="(max-width: 560px) 100vw, (max-width: 1080px) 50vw, 300px"
+          class="absolute inset-0 size-full object-cover object-[center_30%]"
+        />
+        <div class="relative z-1 flex flex-col gap-2 p-6">
+          <h3 class="type-subtitle tracking-[-0.01em]">Cardio e isométricos</h3>
+          <p class="type-body-sm text-fg-secondary">Tiempo, distancia y holds, en el mismo registro.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

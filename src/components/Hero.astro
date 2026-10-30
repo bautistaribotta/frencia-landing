@@ -1,0 +1,127 @@
+---
+import { Image } from 'astro:assets';
+import { ArrowDown, Flame } from 'lucide-react';
+import BotonWeb from './BotonWeb.astro';
+import Fondo from './Fondo.astro';
+import SelectorTema from './SelectorTema.astro';
+import Tienda from './Tienda.astro';
+import fotoHero from '../assets/fotos/hero-sentadilla.jpg';
+
+const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pad-pagina) max-[900px]:px-5';
+---
+
+<section class="relative isolate flex min-h-[56rem] flex-col max-[900px]:min-h-0" id="inicio" aria-labelledby="hero-titulo">
+  <Fondo variante="flanco" />
+
+  <div class={contenedor}>
+    <header
+      class="glass glass-denso relative z-3 mt-6 flex items-center justify-between gap-4 rounded-pill py-3 pr-3 pl-6 max-[560px]:pl-[18px]"
+    >
+      <a class="marca no-underline" href="#inicio" aria-label="Frencia, inicio">FRENCIA.</a>
+      <nav class="flex gap-1 max-[900px]:hidden" aria-label="Secciones">
+        {
+          [
+            ['#historia', 'Nuestra historia'],
+            ['#que-hace', 'Qué hace'],
+            ['#contacto', 'Contacto'],
+          ].map(([href, texto]) => (
+            <a
+              href={href}
+              class="inline-flex h-(--hit-min) items-center rounded-pill px-3.5 text-sm font-medium text-fg-secondary no-underline transition-colors duration-(--dur-base) ease-out hover:bg-surface-chip hover:text-fg-primary"
+            >
+              {texto}
+            </a>
+          ))
+        }
+      </nav>
+      <div class="flex items-center gap-2.5">
+        <SelectorTema />
+        <a
+          class="glass inline-flex h-(--control-h-md) items-center justify-center rounded-md px-[18px] text-sm leading-none font-semibold text-fg-primary no-underline transition-colors duration-(--dur-base) ease-out hover:bg-surface-card-elevated active:scale-(--press-scale) max-[560px]:hidden"
+          href="https://frencia.fit"
+        >
+          Entrar
+        </a>
+      </div>
+    </header>
+  </div>
+
+  <div
+    class:list={[
+      contenedor,
+      'grid flex-1 grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] items-center gap-16 pt-[72px] pb-24 max-[900px]:grid-cols-1 max-[900px]:gap-10 max-[900px]:pt-12 max-[900px]:pb-16',
+    ]}
+  >
+    <div class="flex flex-col gap-7">
+      <p class="rotulo">Registro de entrenamiento</p>
+      <h1
+        class="font-display text-[clamp(48px,7vw,96px)] leading-[0.98] font-medium tracking-[-0.035em] text-balance"
+        id="hero-titulo"
+      >
+        Cada serie cuenta.
+      </h1>
+      <p class="bajada">
+        Traés la rutina que ya tenés en papel y Frencia la convierte en un registro vivo. Registrá cada serie, seguí tu
+        progresión y dejá que las cuentas se hagan solas.
+      </p>
+      <div class="flex flex-wrap items-center gap-3">
+        <BotonWeb />
+      </div>
+      <div class="flex flex-wrap items-center gap-3">
+        <Tienda tienda="google-play" />
+        <Tienda tienda="app-store" />
+      </div>
+    </div>
+
+    <div class="relative">
+      <div class="foto aspect-4/5">
+        <Image
+          src={fotoHero}
+          alt="Atleta de espaldas con una barra cargada sobre los hombros, lista para una sentadilla"
+          widths={[480, 720, 1080]}
+          sizes="(max-width: 900px) 100vw, 560px"
+          loading="eager"
+          fetchpriority="high"
+          class="object-[62%_center]"
+        />
+      </div>
+      <div
+        class="glass glass-fuerte absolute bottom-10 -left-10 flex w-[280px] flex-col gap-3.5 rounded-xl p-5 max-[900px]:right-4 max-[900px]:bottom-4 max-[900px]:left-4 max-[900px]:w-auto"
+        aria-label="Ejemplo de serie registrada"
+      >
+        <div class="flex items-center justify-between">
+          <span class="rotulo">Serie 3 de 4</span>
+          <span class="meta">SENTADILLA</span>
+        </div>
+        <div class="flex items-baseline gap-2 font-display tabular-nums [font-variation-settings:var(--vs-condensed)]">
+          <span class="text-[56px] leading-none font-medium tracking-[-0.035em]">82.5</span>
+          <span class="text-xl text-fg-primary">kg × 8</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span
+            class="type-data inline-flex items-center gap-1.5 rounded-pill bg-(--surface-intensity-soft) px-2.5 py-1 font-semibold text-(--intensity-text) shadow-(--halo-intensity)"
+          >
+            <Flame aria-hidden="true" size={16} strokeWidth={1.75} />
+            RIR 2
+          </span>
+        </div>
+        <div class="grid grid-cols-4 gap-1.5" aria-hidden="true">
+          <span class="h-[3px] rounded-xs bg-fg-primary"></span>
+          <span class="h-[3px] rounded-xs bg-fg-primary"></span>
+          <span class="h-[3px] rounded-xs bg-signal shadow-halo-signal"></span>
+          <span class="h-[3px] rounded-xs bg-(--data-track)"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class={contenedor}>
+    <a
+      class="inline-flex items-center gap-2 pb-10 text-sm text-fg-tertiary no-underline transition-colors duration-(--dur-base) hover:text-fg-secondary"
+      href="#historia"
+    >
+      <ArrowDown aria-hidden="true" size={16} strokeWidth={1.75} />
+      Conocé la historia
+    </a>
+  </div>
+</section>

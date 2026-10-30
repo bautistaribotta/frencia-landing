@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+import Fondo from './Fondo.astro';
+import fotoHistoria from '../assets/fotos/historia-peso-muerto.jpg';
+
+const hitos = [
+  {
+    meta: '[AÑO] · EL ORIGEN',
+    titulo: 'Lorem ipsum dolor',
+    texto: 'Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod. Vestibulum id ligula porta felis euismod semper.',
+  },
+  {
+    meta: '[AÑO] · LA APP',
+    titulo: 'Sit amet consectetur',
+    texto: 'Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.',
+  },
+  {
+    meta: '[AÑO] · LA MARCA',
+    titulo: 'Adipiscing elit',
+    texto: 'Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.',
+  },
+];
+---
+
+<section class="relative isolate flex min-h-[56rem] flex-col max-[900px]:min-h-0" id="historia" aria-labelledby="historia-titulo">
+  <Fondo variante="base" />
+
+  <div
+    class="relative z-2 mx-auto flex w-full max-w-(--contenido-max) flex-1 flex-col gap-16 px-(--pad-pagina) py-[120px] max-[900px]:gap-10 max-[900px]:px-5 max-[900px]:py-20"
+  >
+    <div class="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] items-center gap-[72px] max-[900px]:grid-cols-1 max-[900px]:gap-10">
+      <div class="foto aspect-4/5">
+        <Image
+          src={fotoHistoria}
+          alt="Atleta tomando una barra con discos desde el piso, en posición de peso muerto"
+          widths={[480, 720, 1080]}
+          sizes="(max-width: 900px) 100vw, 520px"
+          class="object-[40%_center]"
+        />
+      </div>
+      <div class="flex flex-col gap-6">
+        <p class="rotulo">Nuestra historia</p>
+        <h2 class="titulo-seccion" id="historia-titulo">Lorem ipsum dolor sit amet, consectetur adipiscing.</h2>
+        <p class="max-w-[38em] text-fg-secondary">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus. Vivamus
+          sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Maecenas sed diam eget risus varius blandit sit
+          amet non magna.
+        </p>
+        <p class="max-w-[38em] text-fg-secondary">
+          Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Aenean
+          lacinia bibendum nulla sed consectetur. Nullam quis risus eget urna mollis ornare vel eu leo.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-5 max-[900px]:grid-cols-1">
+      {
+        hitos.map((hito) => (
+          <article class="glass flex flex-col gap-3 rounded-xl px-6 pt-(--pad-card) pb-7">
+            <div class="flex items-center gap-2.5">
+              <span class="size-2 rounded-full bg-fg-primary" />
+              <span class="meta">{hito.meta}</span>
+            </div>
+            <h3 class="type-subtitle tracking-[-0.01em]">{hito.titulo}</h3>
+            <p class="type-body-sm text-fg-secondary">{hito.texto}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

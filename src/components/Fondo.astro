@@ -1,0 +1,44 @@
+---
+// Fondo de luces de Lume: tres luces difusas, un velo arriba y abajo, y grano.
+// La variante decide donde caen las luces en cada seccion.
+interface Props {
+  variante: 'flanco' | 'base' | 'velada' | 'cumbre';
+}
+
+const { variante } = Astro.props;
+---
+
+<div class:list={['fondo', `fondo--${variante}`]} aria-hidden="true">
+  <div class="luz luz--b"></div>
+  <div class="luz luz--c"></div>
+  <div class="luz luz--a"></div>
+  <div class="velo"></div>
+  <div class="grano"></div>
+</div>
+
+<style>
+  .fondo { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .luz { position: absolute; aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%); filter: blur(var(--blur-glow)); }
+  .luz--a { background: radial-gradient(closest-side, var(--glow-a), transparent); }
+  .luz--b { background: radial-gradient(closest-side, var(--glow-b), transparent); }
+  .luz--c { background: radial-gradient(closest-side, var(--glow-c), transparent); }
+  .velo { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--velo-top), transparent 22%, transparent 72%, var(--velo-bottom)); }
+  .grano { position: absolute; inset: 0; background-image: url('/grano.png'); background-size: 220px; opacity: 0.22; mix-blend-mode: overlay; }
+
+  /* flanco: borde derecho, media altura (hero) */
+  .fondo--flanco .luz--a { left: 96%; top: 52%; width: 62%; opacity: calc(0.3 * var(--fondo-ganancia)); }
+  .fondo--flanco .luz--b { left: 72%; top: 96%; width: 58%; opacity: calc(0.55 * var(--fondo-ganancia)); }
+  .fondo--flanco .luz--c { left: 100%; top: 4%; width: 36%; opacity: calc(0.16 * var(--fondo-ganancia)); }
+  /* base: sube desde abajo a la izquierda (historia) */
+  .fondo--base .luz--a { left: 6%; top: 104%; width: 60%; opacity: calc(0.26 * var(--fondo-ganancia)); }
+  .fondo--base .luz--b { left: 42%; top: 110%; width: 62%; opacity: calc(0.55 * var(--fondo-ganancia)); }
+  .fondo--base .luz--c { left: 96%; top: 0%; width: 34%; opacity: calc(0.14 * var(--fondo-ganancia)); }
+  /* velada: solo en los bordes (que hace) */
+  .fondo--velada .luz--a { left: 100%; top: 100%; width: 48%; opacity: calc(0.24 * var(--fondo-ganancia)); }
+  .fondo--velada .luz--b { left: 0%; top: 0%; width: 52%; opacity: calc(0.5 * var(--fondo-ganancia)); }
+  .fondo--velada .luz--c { left: 0%; top: 100%; width: 30%; opacity: calc(0.12 * var(--fondo-ganancia)); }
+  /* cumbre: arriba a la derecha (contacto) */
+  .fondo--cumbre .luz--a { left: 88%; top: 0%; width: 56%; opacity: calc(0.28 * var(--fondo-ganancia)); }
+  .fondo--cumbre .luz--b { left: 60%; top: -6%; width: 60%; opacity: calc(0.5 * var(--fondo-ganancia)); }
+  .fondo--cumbre .luz--c { left: 4%; top: 96%; width: 34%; opacity: calc(0.12 * var(--fondo-ganancia)); }
+</style>
