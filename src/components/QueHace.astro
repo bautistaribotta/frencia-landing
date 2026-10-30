@@ -13,7 +13,14 @@ const metricas = [
 ];
 ---
 
-<section class="relative isolate flex min-h-[56rem] flex-col max-[900px]:min-h-0" id="aplicacion" aria-labelledby="hace-titulo">
+<!-- En el teléfono las tarjetas van sin desenfoque: tantas capas con
+     backdrop-filter apiladas sobre el fondo hacen que el navegador del celular
+     deje pedazos sin pintar. Sobre el fondo liso, el blur casi no se nota. -->
+<section
+  class="relative isolate flex min-h-[56rem] flex-col max-[900px]:min-h-0 max-[900px]:[--glass-filter:none] max-[900px]:[--sheet-filter:none]"
+  id="aplicacion"
+  aria-labelledby="hace-titulo"
+>
   <Fondo variante="velada" />
 
   <div
