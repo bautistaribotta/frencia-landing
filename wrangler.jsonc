@@ -1,0 +1,12 @@
+// Deploy en Cloudflare Workers, solo archivos estaticos: Astro genera HTML
+// por pagina en dist/. Cloudflare compila con `npm run build` y sirve dist/;
+// una ruta inexistente devuelve dist/404.html.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "frencia-landing",
+  "compatibility_date": "2026-10-25",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
