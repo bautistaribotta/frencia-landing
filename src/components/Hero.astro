@@ -10,7 +10,7 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
 ---
 
 <section class="relative isolate flex min-h-[56rem] flex-col max-[900px]:min-h-0" id="inicio" aria-labelledby="hero-titulo">
-  <Fondo variante="flanco" />
+  <Fondo variante="base" />
 
   <!-- Lugar de la barra fija (Barra.astro): 24px de margen + 56px de barra. -->
   <div class="h-20" aria-hidden="true"></div>
@@ -18,7 +18,7 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
   <div
     class:list={[
       contenedor,
-      'grid flex-1 grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] items-center gap-16 pt-[72px] pb-24 max-[900px]:grid-cols-1 max-[900px]:gap-10 max-[900px]:pt-12 max-[900px]:pb-16',
+      'grid flex-1 grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] items-center gap-16 pt-[72px] pb-24 max-[900px]:grid-cols-1 max-[900px]:gap-10 max-[900px]:pt-12 max-[900px]:pb-16',
     ]}
   >
     <div class="flex flex-col gap-7">
@@ -42,7 +42,7 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
       </div>
     </div>
 
-    <div class="relative">
+    <div class="relative order-first max-[900px]:order-none">
       <div class="foto aspect-4/5">
         <Image
           src={fotoHero}
@@ -55,7 +55,7 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
         />
       </div>
       <div
-        class="glass glass-fuerte absolute bottom-10 -left-10 flex w-[280px] flex-col gap-3.5 rounded-xl p-5 max-[900px]:right-4 max-[900px]:bottom-4 max-[900px]:left-4 max-[900px]:w-auto"
+        class="glass glass-fuerte absolute -right-10 bottom-10 flex w-[280px] flex-col gap-3.5 rounded-xl p-5 max-[900px]:right-4 max-[900px]:bottom-4 max-[900px]:left-4 max-[900px]:w-auto"
         aria-label="Ejemplo de serie registrada"
       >
         <div class="flex items-center justify-between">

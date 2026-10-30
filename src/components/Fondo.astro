@@ -1,6 +1,8 @@
 ---
-// Fondo de luces de Lume: tres luces difusas, un velo arriba y abajo, y grano.
-// La variante decide donde caen las luces en cada seccion.
+// Fondo de luces de Frencia: el mismo del kit web (POS_WEB) y, en el
+// teléfono, las posiciones de la app (POS_MOVIL). Cada luz es un gradiente
+// radial medido en cqw, así escala con el ancho de la sección; la intensidad
+// sale de --fondo-ganancia, que cambia con el tema.
 interface Props {
   variante: 'flanco' | 'base' | 'velada' | 'cumbre';
 }
@@ -9,36 +11,43 @@ const { variante } = Astro.props;
 ---
 
 <div class:list={['fondo', `fondo--${variante}`]} aria-hidden="true">
-  <div class="luz luz--b"></div>
-  <div class="luz luz--c"></div>
-  <div class="luz luz--a"></div>
-  <div class="velo"></div>
-  <div class="grano"></div>
+  <div class="fondo__luz fondo__luz--a"></div>
+  <div class="fondo__luz fondo__luz--b"></div>
+  <div class="fondo__luz fondo__luz--c"></div>
+  <div class="fondo__grano"></div>
+  <div class="fondo__velo"></div>
 </div>
 
 <style>
-  .fondo { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-  .luz { position: absolute; aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%); filter: blur(var(--blur-glow)); }
-  .luz--a { background: radial-gradient(closest-side, var(--glow-a), transparent); }
-  .luz--b { background: radial-gradient(closest-side, var(--glow-b), transparent); }
-  .luz--c { background: radial-gradient(closest-side, var(--glow-c), transparent); }
-  .velo { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--velo-top), transparent 22%, transparent 72%, var(--velo-bottom)); }
-  .grano { position: absolute; inset: 0; background-image: url('/grano.png'); background-size: 220px; opacity: 0.22; mix-blend-mode: overlay; }
-
-  /* flanco: borde derecho, media altura (hero) */
-  .fondo--flanco .luz--a { left: 96%; top: 52%; width: 62%; opacity: calc(0.3 * var(--fondo-ganancia)); }
-  .fondo--flanco .luz--b { left: 72%; top: 96%; width: 58%; opacity: calc(0.55 * var(--fondo-ganancia)); }
-  .fondo--flanco .luz--c { left: 100%; top: 4%; width: 36%; opacity: calc(0.16 * var(--fondo-ganancia)); }
-  /* base: sube desde abajo a la izquierda (historia) */
-  .fondo--base .luz--a { left: 6%; top: 104%; width: 60%; opacity: calc(0.26 * var(--fondo-ganancia)); }
-  .fondo--base .luz--b { left: 42%; top: 110%; width: 62%; opacity: calc(0.55 * var(--fondo-ganancia)); }
-  .fondo--base .luz--c { left: 96%; top: 0%; width: 34%; opacity: calc(0.14 * var(--fondo-ganancia)); }
-  /* velada: solo en los bordes (que hace) */
-  .fondo--velada .luz--a { left: 100%; top: 100%; width: 48%; opacity: calc(0.24 * var(--fondo-ganancia)); }
-  .fondo--velada .luz--b { left: 0%; top: 0%; width: 52%; opacity: calc(0.5 * var(--fondo-ganancia)); }
-  .fondo--velada .luz--c { left: 0%; top: 100%; width: 30%; opacity: calc(0.12 * var(--fondo-ganancia)); }
-  /* cumbre: arriba a la derecha (contacto) */
-  .fondo--cumbre .luz--a { left: 88%; top: 0%; width: 56%; opacity: calc(0.28 * var(--fondo-ganancia)); }
-  .fondo--cumbre .luz--b { left: 60%; top: -6%; width: 60%; opacity: calc(0.5 * var(--fondo-ganancia)); }
-  .fondo--cumbre .luz--c { left: 4%; top: 96%; width: 34%; opacity: calc(0.12 * var(--fondo-ganancia)); }
+  .fondo{position:absolute;inset:0;z-index:0;overflow:hidden;background:var(--bg-app);pointer-events:none;container-type:size}
+  .fondo__luz{position:absolute;inset:0}
+  .fondo__grano{position:absolute;inset:0;opacity:.18;mix-blend-mode:overlay;background-image:url('/grano.png');background-size:160px}
+  .fondo__velo{position:absolute;inset:0;background:linear-gradient(180deg,var(--velo-top) 0%,transparent 18%,transparent 78%,var(--velo-bottom) 100%)}
+  .fondo--flanco .fondo__luz--a{background:radial-gradient(circle 50cqw at 104% 46%, color-mix(in oklch, var(--glow-a) min(100%, calc(50% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-a) min(100%, calc(22% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+  .fondo--flanco .fondo__luz--b{background:radial-gradient(circle 70cqw at -2% 92%, color-mix(in oklch, var(--glow-b) min(100%, calc(90% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-b) min(100%, calc(40% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+  .fondo--flanco .fondo__luz--c{background:radial-gradient(circle 36cqw at -4% -6%, color-mix(in oklch, var(--glow-c) min(100%, calc(20% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-c) min(100%, calc(9% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+  .fondo--base .fondo__luz--a{background:radial-gradient(circle 52cqw at -2% 98%, color-mix(in oklch, var(--glow-a) min(100%, calc(42% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-a) min(100%, calc(19% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+  .fondo--base .fondo__luz--b{background:radial-gradient(circle 64cqw at 100% 10%, color-mix(in oklch, var(--glow-b) min(100%, calc(90% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-b) min(100%, calc(40% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+  .fondo--base .fondo__luz--c{background:radial-gradient(circle 36cqw at 72% 106%, color-mix(in oklch, var(--glow-c) min(100%, calc(18% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-c) min(100%, calc(8% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+  .fondo--velada .fondo__luz--a{background:radial-gradient(circle 46cqw at 102% 108%, color-mix(in oklch, var(--glow-a) min(100%, calc(40% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-a) min(100%, calc(18% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+  .fondo--velada .fondo__luz--b{background:radial-gradient(circle 66cqw at 10% 60%, color-mix(in oklch, var(--glow-b) min(100%, calc(85% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-b) min(100%, calc(38% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+  .fondo--velada .fondo__luz--c{background:radial-gradient(circle 36cqw at -4% -8%, color-mix(in oklch, var(--glow-c) min(100%, calc(22% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-c) min(100%, calc(10% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+  .fondo--cumbre .fondo__luz--a{background:radial-gradient(circle 52cqw at 90% 0%, color-mix(in oklch, var(--glow-a) min(100%, calc(50% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-a) min(100%, calc(22% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+  .fondo--cumbre .fondo__luz--b{background:radial-gradient(circle 70cqw at 6% 74%, color-mix(in oklch, var(--glow-b) min(100%, calc(90% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-b) min(100%, calc(40% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+  .fondo--cumbre .fondo__luz--c{background:radial-gradient(circle 40cqw at 98% 100%, color-mix(in oklch, var(--glow-c) min(100%, calc(22% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-c) min(100%, calc(10% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+  /* En el celular, las posiciones de la app (POS_MOVIL), como la página pública del kit */
+  @media (max-width:900px){
+    .fondo--flanco .fondo__luz--a{background:radial-gradient(circle 88cqw at 112% 42%, color-mix(in oklch, var(--glow-a) min(100%, calc(50% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-a) min(100%, calc(22% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+    .fondo--flanco .fondo__luz--b{background:radial-gradient(circle 115cqw at -2% 82%, color-mix(in oklch, var(--glow-b) min(100%, calc(90% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-b) min(100%, calc(40% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+    .fondo--flanco .fondo__luz--c{background:radial-gradient(circle 62cqw at -6% -2%, color-mix(in oklch, var(--glow-c) min(100%, calc(20% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-c) min(100%, calc(9% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+    .fondo--base .fondo__luz--a{background:radial-gradient(circle 90cqw at -4% 86%, color-mix(in oklch, var(--glow-a) min(100%, calc(42% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-a) min(100%, calc(19% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+    .fondo--base .fondo__luz--b{background:radial-gradient(circle 110cqw at 100% 18%, color-mix(in oklch, var(--glow-b) min(100%, calc(90% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-b) min(100%, calc(40% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+    .fondo--base .fondo__luz--c{background:radial-gradient(circle 60cqw at 70% 104%, color-mix(in oklch, var(--glow-c) min(100%, calc(18% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-c) min(100%, calc(8% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+    .fondo--velada .fondo__luz--a{background:radial-gradient(circle 82cqw at 102% 104%, color-mix(in oklch, var(--glow-a) min(100%, calc(40% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-a) min(100%, calc(18% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+    .fondo--velada .fondo__luz--b{background:radial-gradient(circle 110cqw at 12% 58%, color-mix(in oklch, var(--glow-b) min(100%, calc(85% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-b) min(100%, calc(38% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+    .fondo--velada .fondo__luz--c{background:radial-gradient(circle 62cqw at -6% -4%, color-mix(in oklch, var(--glow-c) min(100%, calc(22% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-c) min(100%, calc(10% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+    .fondo--cumbre .fondo__luz--a{background:radial-gradient(circle 95cqw at 92% 2%, color-mix(in oklch, var(--glow-a) min(100%, calc(50% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-a) min(100%, calc(22% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+    .fondo--cumbre .fondo__luz--b{background:radial-gradient(circle 115cqw at 8% 62%, color-mix(in oklch, var(--glow-b) min(100%, calc(90% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-b) min(100%, calc(40% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+    .fondo--cumbre .fondo__luz--c{background:radial-gradient(circle 70cqw at 96% 94%, color-mix(in oklch, var(--glow-c) min(100%, calc(22% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-c) min(100%, calc(10% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
+  }
 </style>
