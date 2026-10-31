@@ -1,61 +1,67 @@
 ---
+// Hero centrado sobre el gradiente vivo: el titulo grande al medio, los CTA
+// debajo y la foto como un escenario ancho que se asoma desde abajo y se
+// funde con la seccion siguiente. Encima de la foto flotan dos tarjetas de
+// vidrio con datos de ejemplo: la serie registrada y la progresion.
 import { Image } from 'astro:assets';
-import { ArrowDown, Flame } from 'lucide-react';
+import { ArrowDown, Flame, TrendingUp } from 'lucide-react';
 import BotonWeb from './BotonWeb.astro';
-import Fondo from './Fondo.astro';
+import GradienteVivo from './GradienteVivo.astro';
 import Tienda from './Tienda.astro';
 import fotoHero from '../assets/fotos/hero-sentadilla.jpg';
 
 const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pad-pagina) max-[900px]:px-5';
 ---
 
-<section class="relative isolate flex min-h-[56rem] flex-col max-[900px]:min-h-0" id="inicio" aria-labelledby="hero-titulo">
-  <Fondo variante="base" />
+<section class="relative isolate flex min-h-svh flex-col overflow-hidden" id="inicio" aria-labelledby="hero-titulo">
+  <GradienteVivo />
 
   <!-- Lugar de la barra fija (Barra.astro): 24px de margen + 56px de barra. -->
   <div class="h-20" aria-hidden="true"></div>
 
-  <div
-    class:list={[
-      contenedor,
-      'grid flex-1 grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] items-center gap-16 pt-[72px] pb-24 max-[900px]:grid-cols-1 max-[900px]:gap-10 max-[900px]:pt-12 max-[900px]:pb-16',
-    ]}
-  >
-    <div class="flex flex-col gap-7">
-      <p class="rotulo">Registro de entrenamiento</p>
-      <h1
-        class="font-display text-[clamp(48px,7vw,96px)] leading-[0.98] font-medium tracking-[-0.035em] text-balance"
-        id="hero-titulo"
-      >
-        Cada serie cuenta.
-      </h1>
-      <p class="bajada">
-        Traés la rutina que ya tenés en papel y Frencia la convierte en un registro vivo. Registrá cada serie, seguí tu
-        progresión y dejá que las cuentas se hagan solas.
-      </p>
-      <div class="flex flex-wrap items-center gap-3">
-        <BotonWeb />
-      </div>
-      <div class="flex flex-wrap items-center gap-3">
-        <Tienda tienda="google-play" />
-        <Tienda tienda="app-store" />
-      </div>
-    </div>
+  <div class:list={[contenedor, 'flex flex-col items-center gap-7 pt-12 text-center max-[900px]:pt-10']}>
+    <p class="entra glass inline-flex items-center gap-2.5 rounded-pill py-2 pr-4 pl-3 [animation-delay:0ms]">
+      <span class="latido size-2 rounded-pill bg-signal shadow-halo-signal" aria-hidden="true"></span>
+      <span class="rotulo text-fg-secondary">Registro de entrenamiento</span>
+    </p>
 
-    <div class="relative order-first max-[900px]:order-none">
-      <div class="foto aspect-4/5">
+    <h1
+      class="font-display text-[clamp(56px,9.5vw,136px)] leading-[0.92] font-medium tracking-[-0.045em] text-balance"
+      id="hero-titulo"
+    >
+      <span class="entra inline-block [animation-delay:80ms]">Cada serie</span>{' '}
+      <span class="entra inline-block text-signal-text [animation-delay:180ms]">cuenta.</span>
+    </h1>
+
+    <p class="entra bajada mx-auto [animation-delay:280ms]">
+      Traés la rutina que ya tenés en papel y Frencia la convierte en un registro vivo. Registrá cada serie, seguí tu
+      progresión y dejá que las cuentas se hagan solas.
+    </p>
+
+    <div class="entra flex flex-wrap items-center justify-center gap-3 [animation-delay:380ms]">
+      <BotonWeb />
+      <Tienda tienda="google-play" />
+      <Tienda tienda="app-store" />
+    </div>
+  </div>
+
+  <div class:list={[contenedor, 'entra mt-14 flex-1 [animation-delay:500ms] max-[900px]:mt-12']}>
+    <div class="relative mx-auto max-w-[1040px]">
+      <div class="foto escenario aspect-[2.1/1] max-[900px]:aspect-4/5">
         <Image
           src={fotoHero}
           alt="Atleta de espaldas con una barra cargada sobre los hombros, lista para una sentadilla"
-          widths={[480, 720, 1080]}
-          sizes="(max-width: 900px) 100vw, 560px"
+          widths={[640, 1040, 1169]}
+          sizes="(max-width: 1120px) 100vw, 1040px"
           loading="eager"
           fetchpriority="high"
-          class="object-[62%_center]"
+          class="object-[50%_30%]"
         />
       </div>
+
+      <!-- La serie registrada: a la izquierda, sobresale del escenario. -->
       <div
-        class="glass glass-fuerte absolute -right-10 bottom-10 flex w-[280px] flex-col gap-3.5 rounded-xl p-5 max-[900px]:right-4 max-[900px]:bottom-4 max-[900px]:left-4 max-[900px]:w-auto"
+        class="flota glass glass-fuerte absolute top-[30%] -left-8 flex w-[268px] flex-col gap-3.5 rounded-xl p-5 text-left max-[900px]:top-auto max-[900px]:right-4 max-[900px]:bottom-4 max-[900px]:left-4 max-[900px]:w-auto"
         aria-label="Ejemplo de serie registrada"
       >
         <div class="flex items-center justify-between">
@@ -81,12 +87,32 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
           <span class="h-[3px] rounded-xs bg-(--data-track)"></span>
         </div>
       </div>
+
+      <!-- La progresion: arriba a la derecha, solo en pantallas anchas. -->
+      <div
+        class="flota flota--lenta glass glass-fuerte absolute top-10 -right-8 flex w-[232px] flex-col gap-3 rounded-xl p-4 text-left max-[900px]:hidden"
+        aria-label="Ejemplo de progresión en sentadilla"
+      >
+        <div class="flex items-center justify-between">
+          <span class="rotulo">Progresión</span>
+          <TrendingUp aria-hidden="true" size={16} strokeWidth={1.75} className="text-signal-text" />
+        </div>
+        <svg class="h-12 w-full overflow-visible" viewBox="0 0 200 48" preserveAspectRatio="none" aria-hidden="true">
+          <polyline
+            class="fill-none stroke-signal [stroke-linecap:round] [stroke-linejoin:round] [stroke-width:2.5] [vector-effect:non-scaling-stroke]"
+            points="0,42 34,38 68,34 102,30 136,22 170,16 200,6"></polyline>
+        </svg>
+        <div class="flex items-baseline justify-between">
+          <span class="font-display text-2xl leading-none font-medium tabular-nums">+7.5 kg</span>
+          <span class="meta">6 SEMANAS</span>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class={contenedor}>
+  <div class:list={[contenedor, 'flex justify-center']}>
     <a
-      class="inline-flex items-center gap-2 pb-10 text-sm text-fg-tertiary no-underline transition-colors duration-(--dur-base) hover:text-fg-secondary"
+      class="inline-flex items-center gap-2 py-10 text-sm text-fg-tertiary no-underline transition-colors duration-(--dur-base) hover:text-fg-secondary"
       href="#historia"
     >
       <ArrowDown aria-hidden="true" size={16} strokeWidth={1.75} />
@@ -94,3 +120,51 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
     </a>
   </div>
 </section>
+
+<style>
+  /* La foto se asoma desde abajo: se desvanece hacia la seccion siguiente. */
+  .escenario {
+    mask-image: linear-gradient(180deg, oklch(0% 0 0) 55%, transparent 100%);
+  }
+
+  /* Entrada escalonada: cada bloque sube y aparece una sola vez. */
+  .entra {
+    animation: entra 900ms var(--ease-out) both;
+  }
+  @keyframes entra {
+    from { opacity: 0; transform: translateY(18px); filter: blur(6px); }
+    to { opacity: 1; transform: none; filter: none; }
+  }
+
+  /* Las tarjetas flotan apenas, desfasadas entre si. */
+  .flota {
+    animation: flota 7s var(--ease-in-out) infinite alternate;
+  }
+  .flota--lenta {
+    animation-duration: 9s;
+    animation-delay: -3s;
+  }
+  @keyframes flota {
+    from { transform: translateY(-6px); }
+    to { transform: translateY(6px); }
+  }
+
+  /* El punto del rotulo late como un pulso. */
+  .latido {
+    animation: latido 2.4s var(--ease-in-out) infinite;
+  }
+  @keyframes latido {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.45; transform: scale(0.8); }
+  }
+
+  @media (max-width: 900px) {
+    .flota { animation: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .entra,
+    .flota,
+    .latido { animation: none; }
+  }
+</style>
