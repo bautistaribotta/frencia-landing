@@ -1,28 +1,32 @@
 ---
-// Insignia de tienda en estado "Próximamente": no es un enlace todavía.
+// Botón de tienda. Todavía no hay link a las fichas: sin `href` se ve
+// disponible pero no lleva a ningún lado. Cuando las apps estén publicadas,
+// alcanza con pasarle el link de cada tienda.
 // Los logos salen de simple-icons y se dibujan en el build, sin JS.
 import { siApple, siGoogleplay } from 'simple-icons';
 
 interface Props {
   tienda: 'google-play' | 'app-store';
+  href?: string;
 }
 
-const { tienda } = Astro.props;
+const { tienda, href } = Astro.props;
 const { nombre, icono } =
   tienda === 'google-play'
     ? { nombre: 'Google Play', icono: siGoogleplay }
     : { nombre: 'App Store', icono: siApple };
 ---
 
-<div
-  class="inline-flex h-(--control-h-lg) items-center gap-3 rounded-lg border border-dashed border-border-default bg-surface-chip pr-5 pl-4 text-fg-secondary"
-  aria-label={`${nombre}, próximamente`}
+<a
+  href={href}
+  class="inline-flex h-(--control-h-lg) cursor-pointer items-center gap-3 rounded-lg border border-border-default bg-surface-chip pr-5 pl-4 text-fg-primary no-underline transition-[border-color,transform] duration-(--dur-base) ease-out hover:-translate-y-px hover:border-border-strong"
+  aria-label={`Disponible en ${nombre}`}
 >
   <svg class="size-5 flex-none fill-current" viewBox="0 0 24 24" aria-hidden="true">
     <path d={icono.path} />
   </svg>
   <span class="flex flex-col gap-[3px] leading-none">
-    <span class="rotulo text-(length:--fs-label-sm)">Próximamente en</span>
-    <span class="text-base font-semibold text-fg-primary">{nombre}</span>
+    <span class="rotulo text-(length:--fs-label-sm)">Disponible en</span>
+    <span class="text-base font-semibold">{nombre}</span>
   </span>
-</div>
+</a>
