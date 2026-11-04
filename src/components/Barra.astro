@@ -92,7 +92,9 @@ const links = [
   // Debajo de esta altura la barra se ve siempre.
   const ARRIBA = 80;
 
-  let ultimoY = window.scrollY;
+  // Se toma en el primer scroll: leer scrollY al cargar fuerza un layout de toda
+  // la pagina antes del primer render.
+  let ultimoY: number | null = null;
   // Mientras dura el scroll suave de un link de la barra, no se oculta.
   let navegando = false;
 
@@ -112,6 +114,10 @@ const links = [
     'scroll',
     () => {
       const y = window.scrollY;
+      if (ultimoY === null) {
+        ultimoY = y;
+        return;
+      }
       const delta = y - ultimoY;
       if (y < ARRIBA || navegando || menu.hasAttribute('data-abierto')) {
         if (y < ARRIBA) mostrar(true);
