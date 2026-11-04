@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import fotoHistoria from '../assets/fotos/historia-peso-muerto.jpg';
+import fotoHistoria from '../assets/fotos/historia-peso-muerto-4x5.jpg';
 ---
 
 <section class="relative isolate flex min-h-[56rem] flex-col max-[900px]:min-h-0" id="historia" aria-labelledby="historia-titulo">
@@ -12,9 +12,9 @@ import fotoHistoria from '../assets/fotos/historia-peso-muerto.jpg';
         <Image
           src={fotoHistoria}
           alt="Atleta tomando una barra con discos desde el piso, en posición de peso muerto"
-          widths={[480, 720, 1080]}
-          sizes="(max-width: 900px) 100vw, 520px"
-          class="object-[40%_center]"
+          widths={[360, 480, 624]}
+          sizes="(max-width: 900px) calc(100vw - 42px), 470px"
+          quality={72}
         />
       </div>
       <div class="flex flex-col gap-6">

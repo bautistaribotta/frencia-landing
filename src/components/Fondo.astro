@@ -21,7 +21,7 @@ const { variante } = Astro.props;
 <style>
   .fondo{position:absolute;inset:0;z-index:0;overflow:hidden;background:var(--bg-app);pointer-events:none;container-type:size}
   .fondo__luz{position:absolute;inset:0}
-  .fondo__grano{position:absolute;inset:0;opacity:.18;mix-blend-mode:overlay;background-image:url('/grano.png');background-size:160px}
+  .fondo__grano{position:absolute;inset:0;opacity:.18;mix-blend-mode:overlay;background-image:url('/grano.webp');background-size:160px}
   .fondo__velo{position:absolute;inset:0;background:linear-gradient(180deg,var(--velo-top) 0%,transparent 18%,transparent 78%,var(--velo-bottom) 100%)}
   .fondo--flanco .fondo__luz--a{background:radial-gradient(circle 50cqw at 104% 46%, color-mix(in oklch, var(--glow-a) min(100%, calc(50% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-a) min(100%, calc(22% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}
   .fondo--flanco .fondo__luz--b{background:radial-gradient(circle 70cqw at -2% 92%, color-mix(in oklch, var(--glow-b) min(100%, calc(90% * var(--fondo-ganancia, 1))), transparent) 0%, color-mix(in oklch, var(--glow-b) min(100%, calc(40% * var(--fondo-ganancia, 1))), transparent) 42%, transparent 100%)}

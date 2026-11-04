@@ -126,7 +126,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url('/grano.png');
+    background-image: url('/grano.webp');
     background-size: 180px;
     opacity: 0.35;
     mix-blend-mode: overlay;
