@@ -1,5 +1,6 @@
 ---
-import { AtSign, Mail } from 'lucide-react';
+import { Mail } from 'lucide-react';
+import { siInstagram } from 'simple-icons';
 import BotonWeb from './BotonWeb.astro';
 import Tienda from './Tienda.astro';
 
@@ -50,7 +51,9 @@ const enlace =
           <ul class="flex flex-col gap-1">
             <li>
               <a class={enlace} href="https://www.instagram.com/bauribotta/">
-                <AtSign aria-hidden="true" size={16} strokeWidth={1.75} />
+                <svg class="size-4 flex-none fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d={siInstagram.path} />
+                </svg>
                 @bauribotta
               </a>
             </li>
