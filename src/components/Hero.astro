@@ -2,7 +2,6 @@
 import { Image } from 'astro:assets';
 import { ArrowDown, Flame } from 'lucide-react';
 import BotonWeb from './BotonWeb.astro';
-import Fondo from './Fondo.astro';
 import Tienda from './Tienda.astro';
 import fotoHero from '../assets/fotos/hero-sentadilla.jpg';
 
@@ -10,8 +9,6 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
 ---
 
 <section class="relative isolate flex min-h-[56rem] flex-col max-[900px]:min-h-0" id="inicio" aria-labelledby="hero-titulo">
-  <Fondo variante="base" />
-
   <!-- Lugar de la barra fija (Barra.astro): 24px de margen + 56px de barra. -->
   <div class="h-20" aria-hidden="true"></div>
 

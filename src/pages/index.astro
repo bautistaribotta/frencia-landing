@@ -1,6 +1,7 @@
 ---
 import Barra from '../components/Barra.astro';
 import Contacto from '../components/Contacto.astro';
+import GradienteVivo from '../components/GradienteVivo.astro';
 import Hero from '../components/Hero.astro';
 import Historia from '../components/Historia.astro';
 import QueHace from '../components/QueHace.astro';
@@ -11,11 +12,21 @@ import Layout from '../layouts/Layout.astro';
   title="Frencia · Cada serie cuenta"
   description="Traés la rutina que ya tenés en papel y Frencia la convierte en un registro vivo. Registrá cada serie, seguí tu progresión y dejá que las cuentas se hagan solas."
 >
+  <GradienteVivo />
   <Barra />
-  <main class="relative overflow-hidden">
+  <main class="atenua relative z-1 overflow-hidden">
     <Hero />
     <Historia />
     <QueHace />
     <Contacto />
   </main>
 </Layout>
+
+<style>
+  /* Las nubes bajan de brillo para que el texto se lea: un poco en el hero y
+     mas en el resto de la pagina. La capa crece de a poco, sin marcar cortes. */
+  .atenua {
+    --base: light-dark(var(--bg-app), oklch(0% 0 0));
+    background: linear-gradient(180deg, color-mix(in oklch, var(--base) 38%, transparent) 0, color-mix(in oklch, var(--base) 38%, transparent) 70svh, color-mix(in oklch, var(--base) 62%, transparent) 130svh);
+  }
+</style>
