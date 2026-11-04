@@ -1,8 +1,8 @@
 ---
 // Barra de navegación fija. Se oculta al bajar y vuelve apenas se sube; arriba
 // de todo se ve siempre.
-// - Escritorio: barra angosta y centrada, selector de tema suelto a la derecha
-//   (debajo de 900px la barra se corre a la izquierda para dejarle lugar).
+// - Escritorio: barra angosta y centrada; el botón de tema, suelto en la esquina
+//   de arriba a la derecha, a la misma distancia de los dos bordes.
 // - Teléfono (hasta 700px): logo y hamburguesa; los links y el tema van en el
 //   menú que se despliega.
 import { Menu, X } from 'lucide-react';
@@ -20,7 +20,7 @@ const links = [
   data-barra
 >
   <div
-    class="relative mx-auto flex w-full max-w-(--contenido-max) items-center justify-between gap-4 px-(--pad-pagina) max-[900px]:px-5 min-[900px]:justify-center"
+    class="relative mx-auto flex w-full max-w-(--contenido-max) items-center justify-center gap-4 px-(--pad-pagina) max-[900px]:px-5"
   >
     <header
       class="glass glass-denso flex w-fit items-center gap-6 rounded-pill py-1.5 pr-1.5 pl-6 max-[700px]:w-full max-[700px]:justify-between"
@@ -51,10 +51,6 @@ const links = [
       </button>
     </header>
 
-    <div class="glass glass-denso rounded-pill p-1.5 max-[700px]:hidden min-[900px]:absolute min-[900px]:right-(--pad-pagina)">
-      <SelectorTema />
-    </div>
-
     <div
       id="menu-movil"
       class="glass glass-denso absolute inset-x-5 top-full mt-2 flex flex-col gap-4 rounded-2xl p-3 transition-[opacity,translate] duration-(--dur-base) ease-out not-data-abierto:pointer-events-none not-data-abierto:-translate-y-2 not-data-abierto:opacity-0 min-[700px]:hidden"
@@ -78,6 +74,10 @@ const links = [
         <SelectorTema />
       </div>
     </div>
+  </div>
+
+  <div class="absolute top-6 right-6 max-[700px]:hidden">
+    <SelectorTema />
   </div>
 </div>
 
