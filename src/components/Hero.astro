@@ -84,8 +84,25 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
       class="inline-flex items-center gap-2 pb-10 text-sm text-fg-tertiary no-underline transition-colors duration-(--dur-base) hover:text-fg-secondary"
       href="#historia"
     >
-      <ArrowDown aria-hidden="true" size={16} strokeWidth={1.75} />
+      <span class="flecha inline-flex">
+        <ArrowDown aria-hidden="true" size={16} strokeWidth={1.75} />
+      </span>
       Conocé la historia
     </a>
   </div>
 </section>
+
+<style>
+  /* La flecha sube y baja en un pulso lento: invita a seguir bajando. */
+  .flecha {
+    animation: pulso-flecha 1.8s var(--ease-in-out) infinite;
+  }
+  @keyframes pulso-flecha {
+    0%, 100% { transform: translateY(-2px); }
+    50% { transform: translateY(4px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flecha { animation: none; }
+  }
+</style>
