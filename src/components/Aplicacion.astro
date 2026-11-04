@@ -6,7 +6,7 @@ import fotoCardio from '../assets/fotos/cardio-carrera.jpg';
 
 const metricas = [
   { sigla: 'RIR', titulo: 'Repeticiones en reserva', texto: 'Cuántas te quedaron en reserva, anotadas en cada serie.' },
-  { sigla: 'RPE', titulo: 'Escala de Esfuerzo percibido', texto: '¿No usas RIR? No importa, RPE también esta disponible.' },
+  { sigla: 'RPE', titulo: 'Escala de Esfuerzo percibido', texto: '¿No usás RIR? No importa, RPE también está disponible.' },
 ];
 ---
 
@@ -79,5 +79,9 @@ const metricas = [
   .marco {
     background: light-dark(var(--graphite-1000), var(--surface-raised));
     border-color: light-dark(var(--graphite-1000), var(--glass-line));
+    /* El brillo interior del vidrio se veía como una línea blanca sobre el negro. */
+    box-shadow:
+      inset 0 1px 0 light-dark(transparent, var(--glass-highlight)),
+      0 10px 30px light-dark(oklch(19.3% 0.008 118.6 / 0.06), oklch(0% 0 0 / 0.25));
   }
 </style>
