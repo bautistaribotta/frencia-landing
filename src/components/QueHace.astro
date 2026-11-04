@@ -1,73 +1,53 @@
 ---
 import { Image } from 'astro:assets';
-import { Flame, Monitor } from 'lucide-react';
-import Fondo from './Fondo.astro';
+import { Flame } from 'lucide-react';
 import capturaApp from '../assets/fotos/app-inicio.jpg';
 import fotoCardio from '../assets/fotos/cardio-carrera.jpg';
 
 const metricas = [
-  { sigla: 'RIR', fuego: true, titulo: 'Repeticiones en reserva', texto: 'Cuántas te quedaron en el tanque, anotadas en cada serie.' },
-  { sigla: 'RPE', fuego: true, titulo: 'Esfuerzo percibido', texto: 'Del 1 al 10, serie por serie, para leer cómo venís.' },
-  { sigla: 'AMRAP', fuego: false, titulo: 'Todas las que puedas', texto: 'Registrás el máximo de repeticiones y lo comparás con la última vez.' },
-  { sigla: '1RM', fuego: false, titulo: 'Máximo estimado', texto: 'Tu marca calculada a partir de tus series, sin tener que probarla.' },
-  { sigla: 'kg', fuego: false, titulo: 'Tonelaje', texto: 'El volumen de cada sesión: peso por repeticiones, sumado.' },
+  { sigla: 'RIR', titulo: 'Repeticiones en reserva', texto: 'Cuántas te quedaron en el tanque, anotadas en cada serie.' },
+  { sigla: 'RPE', titulo: 'Esfuerzo percibido', texto: 'Del 1 al 10, serie por serie, para leer cómo venís.' },
 ];
 ---
 
-<!-- En el teléfono las tarjetas van sin desenfoque: tantas capas con
-     backdrop-filter apiladas sobre el fondo hacen que el navegador del celular
-     deje pedazos sin pintar. Sobre el fondo liso, el blur casi no se nota. -->
+<!-- En el teléfono el vidrio va sin desenfoque: las capas con backdrop-filter
+     sobre el fondo hacen que el navegador del celular deje pedazos sin pintar.
+     Sobre el fondo liso, el blur casi no se nota. -->
 <section
   class="relative isolate flex min-h-[56rem] flex-col max-[900px]:min-h-0 max-[900px]:[--glass-filter:none] max-[900px]:[--sheet-filter:none]"
   id="aplicacion"
   aria-labelledby="hace-titulo"
 >
-  <Fondo variante="velada" />
-
   <div
-    class="relative z-2 mx-auto flex w-full max-w-(--contenido-max) flex-1 flex-col gap-14 px-(--pad-pagina) py-[120px] max-[900px]:gap-10 max-[900px]:px-5 max-[900px]:py-20"
+    class="relative z-2 mx-auto grid w-full max-w-(--contenido-max) flex-1 grid-cols-[minmax(0,340px)_minmax(0,1fr)] content-center items-center gap-x-[72px] gap-y-8 px-(--pad-pagina) py-[120px] max-[900px]:grid-cols-1 max-[900px]:gap-y-10 max-[900px]:px-5 max-[900px]:py-20"
   >
-    <div class="grid grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] items-end gap-12 max-[900px]:grid-cols-1 max-[900px]:gap-10">
-      <div class="flex flex-col gap-6">
-        <p class="rotulo">Aplicación</p>
-        <h2 class="titulo-seccion" id="hace-titulo">No genera rutinas. Registra las tuyas.</h2>
-        <p class="bajada">
-          Cargá la rutina que ya usás y registrá cada serie a tu manera. Frencia hace las cuentas que usan los atletas.
-        </p>
-      </div>
-      <div class="glass flex items-start gap-3 rounded-lg px-[18px] py-4">
-        <Monitor aria-hidden="true" size={20} strokeWidth={1.75} className="flex-none" />
-        <p class="type-body-sm text-fg-secondary">
-          En la web planificás y revisás tus rutinas e historial. El entrenamiento se registra en el celular.
-        </p>
+    <div class="glass glass-denso row-span-2 flex rounded-[44px] p-3 max-[900px]:row-span-1 max-[900px]:w-full max-[900px]:max-w-[320px] max-[900px]:justify-self-center">
+      <div class="relative aspect-739/1511 flex-1 overflow-hidden rounded-[34px] bg-surface-inset">
+        <Image
+          src={capturaApp}
+          alt="Pantalla de inicio de la app de Frencia con los días de la rutina Torso-Piernas y el botón para empezar el entrenamiento"
+          widths={[320, 640]}
+          sizes="(max-width: 900px) 296px, 316px"
+          class="absolute inset-0 size-full object-cover object-top"
+        />
       </div>
     </div>
 
-    <div
-      class="grid grid-cols-[minmax(0,0.8fr)_repeat(3,minmax(0,1fr))] grid-rows-2 gap-5 max-[1080px]:grid-cols-2 max-[1080px]:grid-rows-none max-[560px]:grid-cols-1"
-    >
-      <div
-        class="glass glass-denso row-span-2 flex rounded-[44px] p-3 max-[1080px]:col-span-2 max-[1080px]:row-span-1 max-[1080px]:w-full max-[1080px]:max-w-[320px] max-[1080px]:justify-self-center max-[560px]:col-span-1"
-      >
-        <div
-          class="relative min-h-[420px] flex-1 overflow-hidden rounded-[34px] bg-surface-inset max-[1080px]:aspect-739/1511 max-[1080px]:min-h-0"
-        >
-          <Image
-            src={capturaApp}
-            alt="Pantalla de inicio de la app de Frencia con los días de la rutina Torso-Piernas y el botón para empezar el entrenamiento"
-            widths={[320, 640]}
-            sizes="(max-width: 1080px) 296px, 260px"
-            class="absolute inset-0 size-full object-cover object-top"
-          />
-        </div>
-      </div>
+    <div class="flex flex-col gap-6 self-end max-[900px]:order-first">
+      <p class="rotulo">Aplicación</p>
+      <h2 class="titulo-seccion" id="hace-titulo">No genera rutinas. Registra las tuyas.</h2>
+      <p class="bajada">
+        Cargá la rutina que ya usás y registrá cada serie a tu manera. Frencia hace las cuentas que usan los atletas.
+      </p>
+    </div>
 
+    <div class="grid grid-cols-3 gap-5 self-start max-[1080px]:grid-cols-1 max-[900px]:grid-cols-3 max-[560px]:grid-cols-1">
       {
         metricas.map((m) => (
-          <article class="glass flex min-h-[220px] flex-col gap-2.5 rounded-xl p-6">
+          <article class="glass flex min-h-[260px] flex-col gap-2.5 rounded-xl p-6">
             <span class="mb-auto flex items-center gap-2 font-display text-[44px] leading-none font-semibold tracking-[-0.02em] text-(--intensity-text) [font-variation-settings:var(--vs-condensed)]">
               {m.sigla}
-              {m.fuego && <Flame aria-hidden="true" size={20} strokeWidth={1.75} />}
+              <Flame aria-hidden="true" size={20} strokeWidth={1.75} />
             </span>
             <h3 class="type-subtitle tracking-[-0.01em]">{m.titulo}</h3>
             <p class="type-body-sm text-fg-secondary">{m.texto}</p>
@@ -76,13 +56,13 @@ const metricas = [
       }
 
       <article
-        class="glass relative flex min-h-[220px] flex-col justify-end overflow-hidden rounded-xl after:absolute after:inset-0 after:bg-linear-to-t after:from-bg-app after:from-8% after:to-transparent after:to-75% after:content-['']"
+        class="glass relative flex min-h-[260px] flex-col justify-end overflow-hidden rounded-xl after:absolute after:inset-0 after:bg-linear-to-t after:from-bg-app after:from-8% after:to-transparent after:to-75% after:content-['']"
       >
         <Image
           src={fotoCardio}
           alt="Corredor en plena carrera por una avenida"
           widths={[400, 640, 960]}
-          sizes="(max-width: 560px) 100vw, (max-width: 1080px) 50vw, 300px"
+          sizes="(max-width: 560px) 100vw, (max-width: 1080px) 50vw, 240px"
           class="absolute inset-0 size-full object-cover object-[center_30%]"
         />
         <div class="relative z-1 flex flex-col gap-2 p-6">
