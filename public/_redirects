@@ -1,0 +1,19 @@
+# La app web vivia en frencia.fit y paso a app.frencia.fit. Estas reglas mantienen
+# vivos los enlaces viejos: marcadores, mails ya enviados y resultados de Google.
+/login https://app.frencia.fit/login 301
+/signup https://app.frencia.fit/signup 301
+/registro https://app.frencia.fit/signup 301
+/recuperar https://app.frencia.fit/recuperar 301
+/nueva-contrasena https://app.frencia.fit/nueva-contrasena 301
+/terminos https://app.frencia.fit/terminos 301
+/privacidad https://app.frencia.fit/privacidad 301
+/cuenta-en-baja https://app.frencia.fit/cuenta-en-baja 301
+/bienvenida https://app.frencia.fit/bienvenida 301
+/bienvenida/* https://app.frencia.fit/bienvenida/:splat 301
+/rutinas https://app.frencia.fit/rutinas 301
+/rutinas/* https://app.frencia.fit/rutinas/:splat 301
+/historial https://app.frencia.fit/historial 301
+/historial/* https://app.frencia.fit/historial/:splat 301
+/perfil https://app.frencia.fit/perfil 301
+/perfil/* https://app.frencia.fit/perfil/:splat 301
+/configuracion https://app.frencia.fit/configuracion 301
