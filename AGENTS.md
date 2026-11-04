@@ -22,7 +22,7 @@ Repos hermanos:
   son componentes `.astro` sin JavaScript.
 - Iconos de Lucide (`lucide-react`).
 - `@astrojs/sitemap` genera el sitemap a partir de `site` en `astro.config.mjs`.
-- Se despliega en Cloudflare Workers (solo archivos estaticos, `wrangler.jsonc`).
+- Se despliega en Cloudflare Workers con deploy automatico desde GitHub, en frencia.fit (solo archivos estaticos, `wrangler.jsonc`).
 
 Documentacion de Astro: https://docs.astro.build. Consultala antes de tocar
 rutas, componentes de framework, content collections o estilos.
