@@ -1,7 +1,6 @@
 ---
-import { AtSign, Mail, MapPin } from 'lucide-react';
+import { AtSign, Mail } from 'lucide-react';
 import BotonWeb from './BotonWeb.astro';
-import Fondo from './Fondo.astro';
 import Tienda from './Tienda.astro';
 
 const enlace =
@@ -9,8 +8,6 @@ const enlace =
 ---
 
 <section class="relative isolate flex min-h-[56rem] flex-col max-[900px]:min-h-0" id="contacto" aria-labelledby="contacto-titulo">
-  <Fondo variante="cumbre" />
-
   <div
     class="relative z-2 mx-auto flex w-full max-w-(--contenido-max) flex-1 flex-col justify-between gap-[72px] px-(--pad-pagina) pt-[120px] pb-8 max-[900px]:px-5 max-[900px]:pt-20 max-[900px]:pb-6"
   >
@@ -37,22 +34,16 @@ const enlace =
           <p class="rotulo">Contacto</p>
           <ul class="flex flex-col gap-1">
             <li>
-              <a class={enlace} href="mailto:hola@frencia.fit">
-                <Mail aria-hidden="true" size={16} strokeWidth={1.75} />
-                bautistaribotta@hotmail.com
-              </a>
-            </li>
-            <li>
-              <a class={enlace} href="https://instagram.com/">
+              <a class={enlace} href="https://www.instagram.com/bauribotta/">
                 <AtSign aria-hidden="true" size={16} strokeWidth={1.75} />
                 @bauribotta
               </a>
             </li>
             <li>
-              <span class="inline-flex min-h-9 items-center gap-2.5 text-sm text-fg-secondary">
-                <MapPin aria-hidden="true" size={16} strokeWidth={1.75} />
-                Córdoba, Argentina
-              </span>
+              <a class={enlace} href="mailto:hola@frencia.fit">
+                <Mail aria-hidden="true" size={16} strokeWidth={1.75} />
+                bautistaribotta@hotmail.com
+              </a>
             </li>
           </ul>
         </div>
