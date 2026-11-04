@@ -1,8 +1,7 @@
 ---
 import { Mail } from 'lucide-react';
 import { siInstagram } from 'simple-icons';
-import BotonWeb from './BotonWeb.astro';
-import Tienda from './Tienda.astro';
+import Acciones from './Acciones.astro';
 
 const enlace =
   'inline-flex min-h-9 items-center gap-2.5 text-sm text-fg-secondary no-underline transition-colors duration-(--dur-base) hover:text-fg-primary';
@@ -15,11 +14,7 @@ const enlace =
     <div class="flex max-w-[46rem] flex-col gap-7">
       <p class="rotulo">Empezá hoy</p>
       <h2 class="titulo-seccion" id="contacto-titulo">Cargá la rutina que ya usás. Del resto se encarga Frencia.</h2>
-      <div class="flex flex-wrap items-center gap-3">
-        <BotonWeb />
-        <Tienda tienda="google-play" />
-        <Tienda tienda="app-store" />
-      </div>
+      <Acciones />
     </div>
 
     <footer

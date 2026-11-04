@@ -5,9 +5,10 @@ import { siApple, siGoogleplay } from 'simple-icons';
 
 interface Props {
   tienda: 'google-play' | 'app-store';
+  class?: string;
 }
 
-const { tienda } = Astro.props;
+const { tienda, class: clase } = Astro.props;
 const { nombre, icono } =
   tienda === 'google-play'
     ? { nombre: 'Google Play', icono: siGoogleplay }
@@ -15,14 +16,17 @@ const { nombre, icono } =
 ---
 
 <div
-  class="inline-flex h-(--control-h-lg) items-center gap-3 rounded-lg border border-dashed border-border-default bg-surface-chip pr-5 pl-4 text-fg-secondary"
+  class:list={[
+    'inline-flex h-(--control-h-lg) items-center gap-3 rounded-lg border border-dashed border-border-default bg-surface-chip pr-5 pl-4 text-fg-secondary max-[700px]:gap-2 max-[700px]:pr-3 max-[700px]:pl-3',
+    clase,
+  ]}
   aria-label={`${nombre}, próximamente`}
 >
-  <svg class="size-5 flex-none fill-current" viewBox="0 0 24 24" aria-hidden="true">
+  <svg class="size-5 flex-none fill-current max-[370px]:hidden" viewBox="0 0 24 24" aria-hidden="true">
     <path d={icono.path} />
   </svg>
-  <span class="flex flex-col gap-[3px] leading-none">
-    <span class="rotulo text-(length:--fs-label-sm)">Próximamente en</span>
-    <span class="text-base font-semibold text-fg-primary">{nombre}</span>
+  <span class="flex flex-col gap-1.5 whitespace-nowrap">
+    <span class="rotulo text-(length:--fs-label-sm) leading-none!">Próximamente<span class="max-[700px]:hidden"> en</span></span>
+    <span class="text-base leading-none font-semibold text-fg-primary">{nombre}</span>
   </span>
 </div>

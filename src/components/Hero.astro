@@ -1,8 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { ArrowDown, Flame } from 'lucide-react';
-import BotonWeb from './BotonWeb.astro';
-import Tienda from './Tienda.astro';
+import Acciones from './Acciones.astro';
 import fotoHero from '../assets/fotos/hero-sentadilla.jpg';
 
 const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pad-pagina) max-[900px]:px-5';
@@ -30,11 +29,7 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
         Traés la rutina que ya tenés en papel y Frencia la convierte en un registro vivo. Registrá cada serie, seguí tu
         progresión y dejá que las cuentas se hagan solas.
       </p>
-      <div class="flex flex-wrap items-center gap-3">
-        <BotonWeb />
-        <Tienda tienda="google-play" />
-        <Tienda tienda="app-store" />
-      </div>
+      <Acciones />
     </div>
 
     <div class="relative order-first max-[900px]:order-none">

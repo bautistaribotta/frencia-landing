@@ -1,0 +1,12 @@
+---
+// Los tres botones del hero y del cierre. En el celular van en dos filas: la
+// web a todo el ancho y debajo las tiendas, con App Store a la izquierda.
+import BotonWeb from './BotonWeb.astro';
+import Tienda from './Tienda.astro';
+---
+
+<div class="flex flex-wrap items-center gap-3 max-[700px]:grid max-[700px]:grid-cols-2">
+  <BotonWeb class="max-[700px]:col-span-2" />
+  <Tienda tienda="google-play" class="max-[700px]:order-1" />
+  <Tienda tienda="app-store" />
+</div>
