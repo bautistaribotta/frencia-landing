@@ -9,6 +9,45 @@
 @import 'tailwindcss';
 @import './tokens/tokens.css';
 
+/* Respaldo con las métricas de Instrument Sans: mientras carga la fuente web,
+   el texto ocupa casi lo mismo y al cambiar no mueve la página. Calculado con
+   capsize a partir del archivo de la fuente. Las familias se pisan acá porque
+   tokens.css no se edita a mano. */
+@font-face {
+  font-family: "Instrument Sans Respaldo";
+  src: local("Arial"), local("Roboto");
+  size-adjust: 102.74%;
+  ascent-override: 94.42%;
+  descent-override: 24.33%;
+  line-gap-override: 0%;
+}
+
+/* Arial no tiene el eje wdth: los textos angostos llevan su propio respaldo,
+   escalado con la proporción medida contra la fuente real. Si no, "Próximamente
+   en" ensancha los botones, la fila se parte y salta todo el hero. */
+@font-face {
+  font-family: "Instrument Sans Respaldo Semi";
+  src: local("Arial"), local("Roboto");
+  size-adjust: 84.66%;
+  ascent-override: 114.58%;
+  descent-override: 29.53%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Instrument Sans Respaldo Condensada";
+  src: local("Arial"), local("Roboto");
+  size-adjust: 72.64%;
+  ascent-override: 133.54%;
+  descent-override: 34.42%;
+  line-gap-override: 0%;
+}
+:root {
+  --font-display: "Instrument Sans", "Instrument Sans Respaldo", "Helvetica Neue", system-ui, sans-serif;
+  --font-sans: "Instrument Sans", "Instrument Sans Respaldo", "Helvetica Neue", system-ui, -apple-system, sans-serif;
+  --fuente-semi: "Instrument Sans", "Instrument Sans Respaldo Semi", "Helvetica Neue", system-ui, sans-serif;
+  --fuente-condensada: "Instrument Sans", "Instrument Sans Respaldo Condensada", "Helvetica Neue", system-ui, sans-serif;
+}
+
 /* Los colores apuntan a los tokens semánticos, así cambian solos con el
    tema. Los de texto van como fg-* porque Tailwind reserva --text-* para
    tamaños y chocaría con --text-primary, --text-body, etc.
@@ -90,6 +129,7 @@
 /* Rotulo: etiqueta corta en mayusculas sobre titulos y columnas. */
 @utility rotulo {
   font: var(--text-label);
+  font-family: var(--fuente-semi);
   font-variation-settings: var(--vs-semi);
   letter-spacing: var(--ls-wider);
   text-transform: uppercase;
@@ -135,7 +175,7 @@
 }
 
 @utility marca {
-  font-family: var(--font-display);
+  font-family: var(--fuente-condensada);
   font-weight: var(--fw-bold);
   font-variation-settings: var(--vs-condensed);
   font-size: 24px;
