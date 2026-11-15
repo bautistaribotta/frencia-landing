@@ -23,14 +23,16 @@ const links = [
   <div
     class="relative mx-auto flex w-full max-w-(--contenido-max) items-center justify-center gap-4 px-(--pad-pagina) max-[900px]:px-5"
   >
+    <!-- scroll-target-group marca el link de la sección que se está viendo
+         (:target-current). Va en el header para que el logo (#inicio) también
+         sea parte del grupo: arriba de todo la sección actual es el inicio, que
+         no se marca, y así ninguna opción del nav queda resaltada. -->
     <header
-      class="glass glass-denso flex w-fit items-center gap-6 rounded-pill py-1.5 pr-1.5 pl-6 max-[700px]:w-full max-[700px]:justify-between"
+      class="glass glass-denso flex w-fit items-center gap-6 rounded-pill py-1.5 pr-1.5 pl-6 [scroll-target-group:auto] max-[700px]:w-full max-[700px]:justify-between"
     >
       <a class="marca no-underline" href="#inicio" aria-label="Frencia, inicio">FRENCIA.</a>
       <nav class="flex items-center" aria-label="Secciones">
-        <!-- scroll-target-group marca el link de la sección que se está viendo
-             (:target-current). Donde no hay soporte, no se marca ninguno. -->
-        <ul class="flex gap-1 [scroll-target-group:auto] max-[700px]:hidden" data-links>
+        <ul class="flex gap-1 max-[700px]:hidden" data-links>
           {
             links.map(([href, texto]) => (
               <li>
@@ -207,14 +209,18 @@ const links = [
   });
 
   // El link de la sección visible se marca con CSS; aria-current lo anuncia a
-  // los lectores de pantalla. Se actualiza cuando termina el scroll.
+  // los lectores de pantalla. Se actualiza cuando termina el scroll. Arriba de
+  // todo el actual es el logo, que no está en [data-links]: no queda ninguno.
   if (CSS.supports('scroll-target-group', 'auto')) {
     const links = document.querySelectorAll<HTMLAnchorElement>('[data-links] a');
     const marcarActual = () => {
       const actual = document.querySelector('[data-links] a:target-current');
       links.forEach((l) => (l === actual ? l.setAttribute('aria-current', 'true') : l.removeAttribute('aria-current')));
     };
-    marcarActual();
-    document.addEventListener('scrollend', marcarActual);
+    // :target-current se actualiza al pintar el cuadro siguiente: se lee
+    // después, para no dejar aria-current con la sección anterior.
+    const despuesDePintar = () => requestAnimationFrame(() => requestAnimationFrame(marcarActual));
+    despuesDePintar();
+    document.addEventListener('scrollend', despuesDePintar);
   }
 </script>
