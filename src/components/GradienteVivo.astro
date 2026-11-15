@@ -29,11 +29,19 @@
     pointer-events: none;
   }
 
+  /* Sin will-change: la animacion de transform ya promueve cada mancha a su
+     capa, y fijarlo en seis capas de hasta 80vmax gasta memoria de GPU de mas.
+     La animacion solo corre si no se pidio movimiento reducido, y se pausa
+     desde el boton del pie (data-fondo="pausado" en <html>). */
   .vivo__mancha {
     position: absolute;
     border-radius: 50%;
-    will-change: transform;
-    animation: var(--deriva) var(--dur) var(--ease-in-out) infinite alternate;
+    @media (prefers-reduced-motion: no-preference) {
+      animation: var(--deriva) var(--dur) var(--ease-in-out) infinite alternate;
+    }
+  }
+  :global(:root[data-fondo='pausado']) .vivo__mancha {
+    animation-play-state: paused;
   }
 
   /* Lima brillante arriba a la derecha: la luz principal. */
@@ -142,7 +150,4 @@
     100% { transform: translate(8%, -12%) scale(0.92); }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .vivo__mancha { animation: none; }
-  }
 </style>

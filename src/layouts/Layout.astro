@@ -1,12 +1,15 @@
 ---
 import '../design/global.css';
+import fuentePrincipal from '../design/fuentes/InstrumentSans-latin-var.woff2?url';
 
 interface Props {
   title: string;
   description: string;
+  // false en paginas que Google no tiene que guardar, como la 404.
+  indexar?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, indexar = true } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const imagenCompartir = new URL('/og-frencia.jpg', Astro.site);
 const altCompartir = 'Pantalla de inicio de la app de Frencia junto a la frase Cada serie cuenta';
@@ -17,9 +20,25 @@ const altCompartir = 'Pantalla de inicio de la app de Frencia junto a la frase C
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Avisa los dos temas antes del CSS para que el navegador pinte el fondo
+         y sus controles con el tema correcto desde el primer cuadro. -->
+    <meta name="color-scheme" content="light dark" />
+    <script is:inline>
+      // Aplica el tema elegido antes de pintar. Sin eleccion sigue al sistema.
+      try {
+        const tema = localStorage.getItem('tema');
+        if (tema === 'dark' || tema === 'light') {
+          document.documentElement.dataset.theme = tema;
+          document.querySelector('meta[name="color-scheme"]').content = tema;
+        }
+        // El fondo animado queda pausado si el usuario lo pauso antes.
+        if (localStorage.getItem('fondo') === 'pausado') document.documentElement.dataset.fondo = 'pausado';
+      } catch {}
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {indexar ? <link rel="canonical" href={canonical} /> : <meta name="robots" content="noindex" />}
+    <link rel="preload" href={fuentePrincipal} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
@@ -42,14 +61,24 @@ const altCompartir = 'Pantalla de inicio de la app de Frencia junto a la frase C
     <meta name="twitter:image" content={imagenCompartir} />
     <meta name="twitter:image:alt" content={altCompartir} />
     <meta name="generator" content={Astro.generator} />
-    <script is:inline>
-      try {
-        const tema = localStorage.getItem('tema');
-        if (tema === 'dark' || tema === 'light') document.documentElement.dataset.theme = tema;
-      } catch {}
+    <!-- Chrome precarga la app web cuando el puntero se queda sobre un enlace a
+         ella. Los navegadores que no lo soportan lo ignoran. -->
+    <script type="speculationrules" is:inline>
+      {
+        "prefetch": [{
+          "where": { "href_matches": "https://app.frencia.fit/*" },
+          "eagerness": "moderate"
+        }]
+      }
     </script>
   </head>
   <body>
+    <a
+      href="#contenido"
+      class="sr-only rounded-pill bg-surface-raised px-4 py-2.5 text-sm font-medium text-fg-primary no-underline shadow-glass focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-(--z-tooltip)"
+    >
+      Saltar al contenido
+    </a>
     <slot />
   </body>
 </html>

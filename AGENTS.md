@@ -18,9 +18,10 @@ Repos hermanos:
 
 - Astro (salida estatica, sin SSR). Cada pagina es HTML generado en el build.
 - Tailwind 4 (via `@tailwindcss/vite`) conectado a los tokens de Lume.
-- React solo como isla (`client:*`) donde haga falta interactividad; el resto
-  son componentes `.astro` sin JavaScript.
-- Iconos de Lucide (`lucide-react`).
+- Componentes `.astro`; la interactividad va en `<script>` del componente. Hoy
+  no hay React: si alguna vez hace falta una isla (`client:*`), se agrega
+  `@astrojs/react` en ese momento.
+- Iconos de Lucide (`@lucide/astro`, props `size`, `stroke-width` y `class`).
 - `@astrojs/sitemap` genera el sitemap a partir de `site` en `astro.config.mjs`.
 - Se despliega en Cloudflare Workers con deploy automatico desde GitHub, en frencia.fit (solo archivos estaticos, `wrangler.jsonc`).
 

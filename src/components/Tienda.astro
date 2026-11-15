@@ -17,10 +17,9 @@ const { nombre, icono } =
 
 <div
   class:list={[
-    'inline-flex h-(--control-h-lg) items-center gap-3 rounded-lg border border-dashed border-border-default bg-surface-chip pr-5 pl-4 text-fg-secondary max-[700px]:gap-2 max-[700px]:pr-3 max-[700px]:pl-3',
+    'inline-flex min-h-(--control-h-lg) items-center gap-3 rounded-lg border border-dashed border-border-default bg-surface-chip pr-5 pl-4 text-fg-secondary max-[700px]:gap-2 max-[700px]:pr-3 max-[700px]:pl-3',
     clase,
   ]}
-  aria-label={`${nombre}, próximamente`}
 >
   <svg class="size-5 flex-none fill-current max-[370px]:hidden" viewBox="0 0 24 24" aria-hidden="true">
     <path d={icono.path} />

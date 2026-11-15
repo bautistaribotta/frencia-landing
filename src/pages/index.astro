@@ -6,6 +6,7 @@ import GradienteVivo from '../components/GradienteVivo.astro';
 import Hero from '../components/Hero.astro';
 import Historia from '../components/Historia.astro';
 import Layout from '../layouts/Layout.astro';
+import Pie from '../components/Pie.astro';
 ---
 
 <Layout
@@ -14,12 +15,17 @@ import Layout from '../layouts/Layout.astro';
 >
   <GradienteVivo />
   <Barra />
-  <main class="atenua relative z-1 overflow-hidden">
-    <Hero />
-    <Historia />
-    <Aplicacion />
-    <Contacto />
-  </main>
+  <!-- overflow-clip y no hidden: recorta igual pero no crea un contenedor de
+       scroll, que confundiria a scroll-target-group de la barra. -->
+  <div class="atenua relative z-1 overflow-clip">
+    <main id="contenido" tabindex="-1" class="outline-none">
+      <Hero />
+      <Historia />
+      <Aplicacion />
+      <Contacto />
+    </main>
+    <Pie />
+  </div>
 </Layout>
 
 <style>

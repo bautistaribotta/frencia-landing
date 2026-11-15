@@ -1,0 +1,96 @@
+---
+// Pie de la página. Va fuera de <main> para que sea el landmark contentinfo.
+// Incluye el control para pausar el fondo animado (WCAG 2.2.2): la etiqueta sale
+// del CSS segun data-fondo en <html>, que el script inline de Layout aplica
+// antes de pintar. Con movimiento reducido el fondo ya esta quieto y el boton
+// no se muestra.
+import { Mail } from '@lucide/astro';
+import { siInstagram } from 'simple-icons';
+
+const enlace =
+  'inline-flex min-h-9 items-center gap-2.5 text-sm text-fg-secondary no-underline transition-colors duration-(--dur-base) hover:text-fg-primary';
+---
+
+<footer class="relative z-2 mx-auto flex w-full max-w-(--contenido-max) flex-col gap-[72px] px-(--pad-pagina) pb-8 max-[900px]:px-5 max-[900px]:pb-6">
+  <div
+    class="glass grid grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))] gap-10 rounded-2xl p-10 max-[1080px]:grid-cols-2 max-[560px]:grid-cols-1 max-[560px]:p-7"
+  >
+    <div class="flex flex-col gap-3.5">
+      <span class="marca">FRENCIA.</span>
+      <p class="type-body-sm text-fg-secondary">
+        Cada serie cuenta. Tu rutina, tus series y tu progreso, en un solo registro.
+      </p>
+    </div>
+    <!-- role="list": Safari deja de anunciar como lista un <ul> sin viñetas. -->
+    <div class="flex flex-col gap-3.5">
+      <p class="rotulo">Producto</p>
+      <ul class="flex flex-col gap-1" role="list">
+        <li><a class={enlace} href="https://app.frencia.fit">Frencia Web</a></li>
+        <li><a class={enlace} href="#aplicacion">Aplicación</a></li>
+        <li><a class={enlace} href="#historia">Nuestra historia</a></li>
+      </ul>
+    </div>
+    <div class="flex flex-col gap-3.5">
+      <p class="rotulo">Legal</p>
+      <ul class="flex flex-col gap-1" role="list">
+        <li><a class={enlace} href="https://app.frencia.fit/terminos">Términos y condiciones</a></li>
+        <li><a class={enlace} href="https://app.frencia.fit/privacidad">Política de privacidad</a></li>
+      </ul>
+    </div>
+    <div class="flex flex-col gap-3.5">
+      <p class="rotulo">Contacto</p>
+      <ul class="flex flex-col gap-1" role="list">
+        <li>
+          <a class={enlace} href="https://www.instagram.com/bauribotta/">
+            <svg class="size-4 flex-none fill-current" viewBox="0 0 24 24" aria-hidden="true">
+              <path d={siInstagram.path} />
+            </svg>
+            @bauribotta
+          </a>
+        </li>
+        <li>
+          <a class={enlace} href="mailto:bautistaribotta@hotmail.com">
+            <Mail aria-hidden="true" size={16} stroke-width={1.75} />
+            bautistaribotta@hotmail.com
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap items-center justify-between gap-3 border-t border-divider pt-6">
+    <span class="meta">© 2026 FRENCIA · TODOS LOS DERECHOS RESERVADOS</span>
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
+      <button
+        type="button"
+        class="meta min-h-6 cursor-pointer border-0 bg-transparent p-0 transition-colors duration-(--dur-base) hover:text-fg-secondary motion-reduce:hidden"
+        data-boton-fondo
+      >
+        <span class="pausar">PAUSAR FONDO ANIMADO</span>
+        <span class="reanudar">REANUDAR FONDO ANIMADO</span>
+      </button>
+      <span class="meta">FRENCIA.FIT</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .reanudar { display: none; }
+  :global(:root[data-fondo='pausado']) .reanudar { display: inline; }
+  :global(:root[data-fondo='pausado']) .pausar { display: none; }
+</style>
+
+<script>
+  const raiz = document.documentElement;
+  document.querySelector('[data-boton-fondo]')?.addEventListener('click', () => {
+    const pausado = raiz.dataset.fondo !== 'pausado';
+    if (pausado) raiz.dataset.fondo = 'pausado';
+    else delete raiz.dataset.fondo;
+    try {
+      if (pausado) localStorage.setItem('fondo', 'pausado');
+      else localStorage.removeItem('fondo');
+    } catch {
+      // Sin almacenamiento: la pausa dura hasta recargar.
+    }
+  });
+</script>

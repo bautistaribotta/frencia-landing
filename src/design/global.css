@@ -178,7 +178,7 @@
   font-family: var(--fuente-condensada);
   font-weight: var(--fw-bold);
   font-variation-settings: var(--vs-condensed);
-  font-size: 24px;
+  font-size: 1.5rem;
   letter-spacing: -0.01em;
   color: var(--text-primary);
 }
@@ -186,16 +186,18 @@
 @utility titulo-seccion {
   font-family: var(--font-display);
   font-weight: var(--fw-medium);
-  font-size: clamp(34px, 4.2vw, 56px);
+  /* rem + vw: crece con la ventana y tambien con el tamaño de letra del usuario. */
+  font-size: clamp(2.125rem, 0.5rem + 3.6vw, 3.5rem);
   line-height: 1.04;
   letter-spacing: var(--ls-display);
   text-wrap: balance;
 }
 @utility bajada {
-  font-size: clamp(17px, 1.5vw, 20px);
+  font-size: clamp(1.0625rem, 0.5rem + 0.9vw, 1.25rem);
   line-height: 1.5;
   color: var(--text-secondary);
   max-width: 34em;
+  text-wrap: pretty;
 }
 
 @layer base {
@@ -213,10 +215,13 @@
     border-radius: var(--radius-sm);
   }
 
-  html { scroll-behavior: smooth; }
+  /* Los links internos dejan el destino debajo de la barra fija (24px de
+     margen + 56px de barra), no tapado por ella. */
+  html { scroll-padding-top: calc(var(--space-7) + var(--hit-min) + 12px); }
 
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    *, *::before, *::after { transition: none !important; }
+  /* Con movimiento reducido el salto es directo. Las transiciones de color
+     siguen; cada componente apaga solo las que mueven o escalan. */
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
   }
 }

@@ -1,13 +1,13 @@
 ---
-import { Image } from 'astro:assets';
-import { ArrowDown, Flame } from 'lucide-react';
+import { Picture } from 'astro:assets';
+import { ArrowDown, Flame } from '@lucide/astro';
 import Acciones from './Acciones.astro';
 import fotoHero from '../assets/fotos/hero-sentadilla.jpg';
 
 const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pad-pagina) max-[900px]:px-5';
 ---
 
-<section class="relative isolate flex min-h-[56rem] flex-col max-[900px]:min-h-0" id="inicio" aria-labelledby="hero-titulo">
+<section class="relative isolate flex min-h-[56rem] flex-col max-[900px]:min-h-0" id="inicio">
   <!-- Lugar de la barra fija (Barra.astro): 24px de margen + 56px de barra. -->
   <div class="h-20" aria-hidden="true"></div>
 
@@ -20,7 +20,7 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
     <div class="flex flex-col gap-7">
       <p class="rotulo">Registro de entrenamiento</p>
       <h1
-        class="font-display text-[clamp(48px,7vw,96px)] leading-[0.98] font-medium tracking-[-0.035em] text-balance"
+        class="font-display text-[clamp(3rem,0.5rem+6.5vw,6rem)] leading-[0.98] font-medium tracking-[-0.035em] text-balance"
         id="hero-titulo"
       >
         Cada serie cuenta.
@@ -34,8 +34,10 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
 
     <div class="relative order-first max-[900px]:order-none">
       <div class="foto aspect-4/5">
-        <Image
+        <Picture
           src={fotoHero}
+          formats={['avif', 'webp']}
+          pictureAttributes={{ class: 'contents' }}
           alt="Atleta de espaldas con una barra cargada sobre los hombros, lista para una sentadilla"
           widths={[480, 720, 1080]}
           sizes="(max-width: 900px) 100vw, 560px"
@@ -46,6 +48,7 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
       </div>
       <div
         class="glass glass-fuerte absolute -right-10 bottom-10 flex w-[280px] flex-col gap-3.5 rounded-xl p-5 max-[900px]:right-4 max-[900px]:bottom-4 max-[900px]:left-4 max-[900px]:w-auto"
+        role="group"
         aria-label="Ejemplo de serie registrada"
       >
         <div class="flex items-center justify-between">
@@ -53,14 +56,14 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
           <span class="meta">SENTADILLA</span>
         </div>
         <div class="flex items-baseline gap-2 font-display tabular-nums [font-variation-settings:var(--vs-condensed)]">
-          <span class="text-[56px] leading-none font-medium tracking-[-0.035em]">82.5</span>
+          <span class="text-[3.5rem] leading-none font-medium tracking-[-0.035em]">82.5</span>
           <span class="text-xl text-fg-primary">kg × 8</span>
         </div>
         <div class="flex items-center justify-between">
           <span
             class="type-data inline-flex items-center gap-1.5 rounded-pill bg-(--surface-intensity-soft) px-2.5 py-1 font-semibold text-(--intensity-text) shadow-(--halo-intensity)"
           >
-            <Flame aria-hidden="true" size={16} strokeWidth={1.75} />
+            <Flame aria-hidden="true" size={16} stroke-width={1.75} />
             RIR 2
           </span>
         </div>
@@ -80,7 +83,7 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
       href="#historia"
     >
       <span class="flecha inline-flex">
-        <ArrowDown aria-hidden="true" size={16} strokeWidth={1.75} />
+        <ArrowDown aria-hidden="true" size={16} stroke-width={1.75} />
       </span>
       Conocé la historia
     </a>
@@ -88,16 +91,15 @@ const contenedor = 'relative z-2 mx-auto w-full max-w-(--contenido-max) px-(--pa
 </section>
 
 <style>
-  /* La flecha sube y baja en un pulso lento: invita a seguir bajando. */
+  /* La flecha sube y baja en un pulso lento: invita a seguir bajando. Hace dos
+     pulsos y se queda quieta, asi no se mueve mas de 5 segundos (WCAG 2.2.2). */
   .flecha {
-    animation: pulso-flecha 1.8s var(--ease-in-out) infinite;
+    @media (prefers-reduced-motion: no-preference) {
+      animation: pulso-flecha 1.8s var(--ease-in-out) 2;
+    }
   }
   @keyframes pulso-flecha {
     0%, 100% { transform: translateY(-2px); }
     50% { transform: translateY(4px); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .flecha { animation: none; }
   }
 </style>

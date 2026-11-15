@@ -1,62 +1,74 @@
 ---
 // Botón de tema, el mismo del acceso de frencia-web: muestra el tema que se ve,
 // luna en oscuro y sol en claro, y un toque pasa al otro. Sin elección sigue al
-// sistema. Escribe data-theme en <html> y lo recuerda en localStorage; el script
-// inline de Layout lo aplica antes de pintar para que no parpadee.
-import { Moon, Sun } from 'lucide-react';
+// sistema; si el toque vuelve al tema del sistema, se borra la elección y la
+// página lo vuelve a seguir. Escribe data-theme en <html> y el meta
+// color-scheme, y lo recuerda en localStorage; el script inline de Layout lo
+// aplica antes de pintar para que no parpadee.
+import { Moon, Sun } from '@lucide/astro';
 ---
 
 <button
   type="button"
   class="glass inline-flex size-10 flex-none cursor-pointer items-center justify-center rounded-md text-fg-secondary transition-colors duration-(--dur-fast) ease-out hover:bg-surface-card-elevated hover:text-fg-primary"
-  aria-label="Cambiar tema"
   data-boton-tema
 >
-  <Moon aria-hidden="true" size={20} strokeWidth={1.75} className="luna" />
-  <Sun aria-hidden="true" size={20} strokeWidth={1.75} className="sol" />
+  <!-- Icono y etiqueta salen del CSS y no del script: así son correctos desde la
+       primera pintada y siguen al sistema aunque el JS no cargue. -->
+  <span class="luna inline-flex">
+    <Moon aria-hidden="true" size={20} stroke-width={1.75} />
+    <span class="sr-only">Pasar a modo claro</span>
+  </span>
+  <span class="sol inline-flex">
+    <Sun aria-hidden="true" size={20} stroke-width={1.75} />
+    <span class="sr-only">Pasar a modo oscuro</span>
+  </span>
 </button>
 
 <style>
-  /* El icono sale del CSS y no del script: así se ve bien desde la primera pintada. */
-  [data-boton-tema] :global(.sol) { display: none; }
-  :global(:root[data-theme='light']) [data-boton-tema] :global(.sol) { display: block; }
-  :global(:root[data-theme='light']) [data-boton-tema] :global(.luna) { display: none; }
+  [data-boton-tema] .sol { display: none; }
+  :global(:root[data-theme='light']) [data-boton-tema] .sol { display: inline-flex; }
+  :global(:root[data-theme='light']) [data-boton-tema] .luna { display: none; }
   @media (prefers-color-scheme: light) {
-    :global(:root:not([data-theme='dark'])) [data-boton-tema] :global(.sol) { display: block; }
-    :global(:root:not([data-theme='dark'])) [data-boton-tema] :global(.luna) { display: none; }
+    :global(:root:not([data-theme='dark'])) [data-boton-tema] .sol { display: inline-flex; }
+    :global(:root:not([data-theme='dark'])) [data-boton-tema] .luna { display: none; }
   }
 </style>
 
 <script>
   const raiz = document.documentElement;
-  const botones = document.querySelectorAll<HTMLButtonElement>('[data-boton-tema]');
+  const meta = document.querySelector<HTMLMetaElement>('meta[name="color-scheme"]');
   const sistemaClaro = window.matchMedia('(prefers-color-scheme: light)');
 
-  // Lo que se está pintando: el tema elegido o, si no hay, el del sistema.
-  function temaActual() {
-    return raiz.dataset.theme ?? (sistemaClaro.matches ? 'light' : 'dark');
+  const temaSistema = () => (sistemaClaro.matches ? 'light' : 'dark');
+
+  function aplicar(tema: string | null) {
+    if (tema === 'light' || tema === 'dark') raiz.dataset.theme = tema;
+    else delete raiz.dataset.theme;
+    if (meta) meta.content = raiz.dataset.theme ?? 'light dark';
   }
 
-  function etiquetar() {
-    const etiqueta = temaActual() === 'dark' ? 'Pasar a modo claro' : 'Pasar a modo oscuro';
-    botones.forEach((b) => {
-      b.setAttribute('aria-label', etiqueta);
-      b.title = etiqueta;
-    });
-  }
-
+  // Pasa al contrario de lo que se ve. Si ese es el tema del sistema, el
+  // usuario está deshaciendo su elección: se borra en vez de guardarla, así la
+  // página vuelve a seguir al sistema. Lo guardado no se toca si después el
+  // sistema cambia y coincide (si no, no se podría fijar un tema).
   function alternar() {
-    const tema = temaActual() === 'dark' ? 'light' : 'dark';
-    raiz.dataset.theme = tema;
+    const visto = raiz.dataset.theme ?? temaSistema();
+    const destino = visto === 'dark' ? 'light' : 'dark';
+    const guardar = destino === temaSistema() ? null : destino;
+    aplicar(guardar);
     try {
-      localStorage.setItem('tema', tema);
+      if (guardar) localStorage.setItem('tema', guardar);
+      else localStorage.removeItem('tema');
     } catch {
       // Sin almacenamiento (modo privado): el tema dura hasta recargar.
     }
-    etiquetar();
   }
 
-  etiquetar();
-  sistemaClaro.addEventListener('change', etiquetar);
-  botones.forEach((b) => b.addEventListener('click', alternar));
+  document.querySelectorAll('[data-boton-tema]').forEach((b) => b.addEventListener('click', alternar));
+
+  // Otra pestaña cambió el tema: esta lo sigue.
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'tema' || e.key === null) aplicar(e.newValue);
+  });
 </script>
