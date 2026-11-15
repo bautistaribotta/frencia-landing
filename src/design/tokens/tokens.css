@@ -2,7 +2,8 @@
    FRENCIA WEB · tokens exportables (Lume)
    Mismos nombres semánticos que tokens.json / la app iOS. Todos los
    colores en oklch. Generado desde tokens.json: si cambia un valor,
-   se regenera este archivo; no se edita a mano.
+   se regenera este archivo; no se edita a mano. Los tamaños de fuente
+   (--fs-*) se exportan en rem: el px de tokens.json dividido 16.
 
    Tema:
    - <html data-theme="dark">   fuerza oscuro
@@ -55,20 +56,23 @@
   --tabbar-h: 84px;
   --navbar-h: 52px;
   --hairline: 1px;
-  --fs-display-2xl: 72px;
-  --fs-display-xl: 56px;
-  --fs-display-lg: 40px;
-  --fs-display-md: 34px;
-  --fs-title-xl: 28px;
-  --fs-title-lg: 26px;
-  --fs-title-md: 19px;
-  --fs-title-sm: 17px;
-  --fs-body-lg: 16px;
-  --fs-body-md: 14px;
-  --fs-body-sm: 13px;
-  --fs-label-lg: 12px;
-  --fs-label-md: 11px;
-  --fs-label-sm: 10px;
+  /* Tamaños de fuente en rem (px de tokens.json / 16): siguen el tamaño de
+     letra que el usuario elige en el navegador o el sistema. Con el valor
+     por defecto (16px) se ven igual que en px. */
+  --fs-display-2xl: 4.5rem;  /* 72px */
+  --fs-display-xl: 3.5rem;  /* 56px */
+  --fs-display-lg: 2.5rem;  /* 40px */
+  --fs-display-md: 2.125rem;  /* 34px */
+  --fs-title-xl: 1.75rem;  /* 28px */
+  --fs-title-lg: 1.625rem;  /* 26px */
+  --fs-title-md: 1.1875rem;  /* 19px */
+  --fs-title-sm: 1.0625rem;  /* 17px */
+  --fs-body-lg: 1rem;  /* 16px */
+  --fs-body-md: 0.875rem;  /* 14px */
+  --fs-body-sm: 0.8125rem;  /* 13px */
+  --fs-label-lg: 0.75rem;  /* 12px */
+  --fs-label-md: 0.6875rem;  /* 11px */
+  --fs-label-sm: 0.625rem;  /* 10px */
   --fw-regular: 400;
   --fw-medium: 500;
   --fw-semibold: 600;
@@ -136,6 +140,8 @@
   --panel-w: 400px;          /* panel lateral de configuración */
   --barra-movil-h: 64px;     /* barra inferior del teléfono, sin el margen seguro */
   --columna-dia-w: 300px;    /* columna de un día en el constructor */
+  --sesion-w: 560px;         /* columna del wizard de la sesión en tablet y escritorio */
+  --aro-d: 264px;            /* diámetro de la esfera del descanso (220px en el teléfono) */
   --modal-w-sm: 440px;
   --modal-w-md: 560px;
   --foco-w: 2px;             /* anillo de foco de teclado */
@@ -325,7 +331,9 @@
 
 /* ---- Seguir al sistema ---- */
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]):not([data-theme="light"]), [data-theme="system"] {
+  /* :where deja este bloque con la prioridad de :root, para que
+     [data-transparencia="reducida"], que va despues, le gane. */
+  :root:where(:not([data-theme="dark"]):not([data-theme="light"])), [data-theme="system"] {
   --success: var(--signal);
   --warning: var(--text-primary);
   --danger: var(--crimson-600);
