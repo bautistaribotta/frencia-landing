@@ -55,6 +55,9 @@
    registran la utilidad: tokens.css va sin capa y le gana al
    `--x: var(--x)` que Tailwind emite en @layer theme. */
 @theme inline {
+  /* Sin los colores de fabrica de Tailwind: la paleta es solo la de Lume. */
+  --color-*: initial;
+
   --color-bg-app: var(--bg-app);
   --color-bg-app-deep: var(--bg-app-deep);
   --color-stage: var(--stage-bg);
