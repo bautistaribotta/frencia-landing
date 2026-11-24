@@ -152,11 +152,13 @@
   -webkit-backdrop-filter: var(--sheet-filter);
 }
 
+/* Radios: redondo lo que se toca o flota (botones, barra, menu) y el marco del
+   telefono, que imita al objeto. El contenido apoyado en la pagina va recto. */
+
 /* Foto con borde de vidrio y grano encima. */
 @utility foto {
   position: relative;
   overflow: hidden;
-  border-radius: var(--radius-2xl);
   border: var(--hairline) solid var(--glass-line);
   box-shadow: var(--shadow-lg);
 
