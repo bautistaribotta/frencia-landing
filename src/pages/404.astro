@@ -2,7 +2,7 @@
 // Pagina para rutas que no existen. Cloudflare la sirve con estado 404
 // (not_found_handling: "404-page" en wrangler.jsonc). Usa las mismas piezas que
 // el inicio: fondo vivo, titulo y el boton de acento.
-import { ArrowLeft } from '@lucide/astro';
+import Icono from '../components/Icono.astro';
 import GradienteVivo from '../components/GradienteVivo.astro';
 import Layout from '../layouts/Layout.astro';
 ---
@@ -25,7 +25,7 @@ import Layout from '../layouts/Layout.astro';
       href="/"
       class="group inline-flex min-h-(--control-h-lg) w-fit items-center justify-center gap-2.5 rounded-lg bg-accent px-6 text-base leading-none font-semibold text-fg-on-accent no-underline shadow-halo-accent transition-[background-color,box-shadow] duration-(--dur-base) ease-out hover:bg-accent-hover active:bg-accent-press"
     >
-      <ArrowLeft aria-hidden="true" size={20} stroke-width={1.75} />
+      <Icono nombre="flecha-izquierda" size={20} />
       Volver al inicio
     </a>
   </main>

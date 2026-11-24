@@ -1,0 +1,28 @@
+---
+// Iconos propios de Frencia: siluetas llenas sobre una grilla de 24, de planos
+// rectos y sin trazo. Se dibujan en el build y toman el color del texto. Son
+// decorativos: el nombre accesible lo pone siempre quien los usa.
+const iconos = {
+  'flecha-derecha': 'M2 10.5h10v3H2zM12 4l10 8-10 8z',
+  'flecha-izquierda': 'M22 10.5H12v3h10zM12 4 2 12l10 8z',
+  'flecha-abajo': 'M10.5 2v10h3V2zM4 12l8 10 8-10z',
+  llama: 'M13 1l6.5 9v7L16 22H8l-3.5-5v-6.5L8 13zM12.5 12.5 9 17.5l1.5 2.5h3l1.5-2.5z',
+  sobre: 'M2 5h20l-10 7zM2 8v11h20V8l-10 7z',
+  menu: 'M2 5h20v2.5H2zM2 10.75h14v2.5H2zM2 16.5h20V19H2z',
+  cerrar: 'M4.5 2.7 12 10.2l7.5-7.5 1.8 1.8-7.5 7.5 7.5 7.5-1.8 1.8-7.5-7.5-7.5 7.5-1.8-1.8 7.5-7.5-7.5-7.5z',
+  luna: 'M13 2A10 10 0 1 0 22 15.5 10 10 0 0 1 13 2z',
+  sol: 'M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM10 5h4l-2-4zM10 19h4l-2 4zM5 10v4l-4-2zM19 10v4l4-2zM8.46 5.64 5.64 8.46 4.22 4.22zM15.54 5.64l2.82 2.82 1.42-4.24zM8.46 18.36l-2.82-2.82-1.42 4.24zM15.54 18.36l2.82-2.82 1.42 4.24z',
+};
+
+interface Props {
+  nombre: keyof typeof iconos;
+  size?: number;
+  class?: string;
+}
+
+const { nombre, size = 20, class: clase } = Astro.props;
+---
+
+<svg class:list={['flex-none fill-current', clase]} width={size} height={size} viewBox="0 0 24 24" aria-hidden="true">
+  <path fill-rule="evenodd" d={iconos[nombre]}></path>
+</svg>

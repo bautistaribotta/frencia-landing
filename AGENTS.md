@@ -21,7 +21,9 @@ Repos hermanos:
 - Componentes `.astro`; la interactividad va en `<script>` del componente. Hoy
   no hay React: si alguna vez hace falta una isla (`client:*`), se agrega
   `@astrojs/react` en ese momento.
-- Iconos de Lucide (`@lucide/astro`, props `size`, `stroke-width` y `class`).
+- Iconos propios en `src/components/Icono.astro` (props `nombre`, `size` y
+  `class`). No se usan librerias de iconos; los logos de marcas salen de
+  `simple-icons`.
 - `@astrojs/sitemap` genera el sitemap a partir de `site` en `astro.config.mjs`.
 - Se despliega en Cloudflare Workers con deploy automatico desde GitHub, en frencia.fit (solo archivos estaticos, `wrangler.jsonc`).
 

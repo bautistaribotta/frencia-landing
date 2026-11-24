@@ -5,7 +5,7 @@
 // página lo vuelve a seguir. Escribe data-theme en <html> y el meta
 // color-scheme, y lo recuerda en localStorage; el script inline de Layout lo
 // aplica antes de pintar para que no parpadee.
-import { Moon, Sun } from '@lucide/astro';
+import Icono from './Icono.astro';
 ---
 
 <button
@@ -16,11 +16,11 @@ import { Moon, Sun } from '@lucide/astro';
   <!-- Icono y etiqueta salen del CSS y no del script: así son correctos desde la
        primera pintada y siguen al sistema aunque el JS no cargue. -->
   <span class="luna inline-flex">
-    <Moon aria-hidden="true" size={20} stroke-width={1.75} />
+    <Icono nombre="luna" size={20} />
     <span class="sr-only">Pasar a modo claro</span>
   </span>
   <span class="sol inline-flex">
-    <Sun aria-hidden="true" size={20} stroke-width={1.75} />
+    <Icono nombre="sol" size={20} />
     <span class="sr-only">Pasar a modo oscuro</span>
   </span>
 </button>

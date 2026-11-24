@@ -4,7 +4,7 @@
 // del CSS segun data-fondo en <html>, que el script inline de Layout aplica
 // antes de pintar. Con movimiento reducido el fondo ya esta quieto y el boton
 // no se muestra.
-import { Mail } from '@lucide/astro';
+import Icono from './Icono.astro';
 import { siInstagram } from 'simple-icons';
 
 const enlace =
@@ -50,7 +50,7 @@ const enlace =
         </li>
         <li>
           <a class={enlace} href="mailto:bautistaribotta@hotmail.com">
-            <Mail aria-hidden="true" size={16} stroke-width={1.75} />
+            <Icono nombre="sobre" size={16} />
             bautistaribotta@hotmail.com
           </a>
         </li>

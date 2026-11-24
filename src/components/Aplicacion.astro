@@ -1,6 +1,6 @@
 ---
 import { Picture } from 'astro:assets';
-import { Flame } from '@lucide/astro';
+import Icono from './Icono.astro';
 import capturaApp from '../assets/fotos/app-inicio.jpg';
 import fotoCardio from '../assets/fotos/cardio-carrera.jpg';
 
@@ -47,7 +47,7 @@ const metricas = [
           <article class="glass flex min-h-[260px] flex-col gap-2.5 p-6">
             <span class="mb-auto flex items-center gap-2 font-display text-[2.75rem] leading-none font-semibold tracking-[-0.02em] text-(--intensity-text) [font-variation-settings:var(--vs-condensed)]">
               {m.sigla}
-              <Flame aria-hidden="true" size={20} stroke-width={1.75} />
+              <Icono nombre="llama" size={20} />
             </span>
             <h3 class="type-subtitle tracking-[-0.01em]">{m.titulo}</h3>
             <p class="type-body-sm text-fg-secondary">{m.texto}</p>

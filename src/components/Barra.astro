@@ -6,7 +6,7 @@
 // - Teléfono (hasta 700px): logo y hamburguesa; los links y el tema van en un
 //   popover nativo, que ya resuelve Escape, el toque afuera y el foco.
 // Un solo <nav>: en cada tamaño se ve una sola de las dos listas.
-import { Menu, X } from '@lucide/astro';
+import Icono from './Icono.astro';
 import SelectorTema from './SelectorTema.astro';
 
 const links = [
@@ -55,8 +55,8 @@ const links = [
           aria-label="Menú"
           data-menu-boton
         >
-          <Menu aria-hidden="true" size={20} stroke-width={1.75} class="group-aria-expanded:hidden" />
-          <X aria-hidden="true" size={20} stroke-width={1.75} class="hidden group-aria-expanded:block" />
+          <Icono nombre="menu" size={20} class="group-aria-expanded:hidden" />
+          <Icono nombre="cerrar" size={20} class="hidden group-aria-expanded:block" />
         </button>
         <!-- El popover no lleva clases de display: le ganarían al display:none
              con el que el navegador lo esconde cerrado. El layout va adentro. -->
