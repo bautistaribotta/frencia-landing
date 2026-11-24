@@ -137,19 +137,62 @@
 }
 @utility meta { font: var(--text-meta); letter-spacing: 0.02em; color: var(--text-tertiary); }
 
-/* Vidrio de Lume: base, fuerte (tarjeta elevada) y denso (barra, telefono). */
+/* PRUEBA: vidrio liquido en lugar del de Lume, adaptado de LiquidGlassCard de
+   ui-layouts. Tres capas, todas detras del contenido:
+   - ::before dobla y desenfoca lo de atras (filtro #vidrio-liquido de Layout).
+   - ::after da el tinte y el filo brillante.
+   - La sombra exterior va en el propio elemento.
+   El original no tiene tinte; aca es el minimo para que el texto se lea. */
 @utility glass {
-  background: var(--surface-card);
-  backdrop-filter: var(--glass-filter);
-  -webkit-backdrop-filter: var(--glass-filter);
-  box-shadow: var(--shadow-glass);
-  border: var(--hairline) solid var(--glass-line);
+  --vidrio-tinte: light-dark(oklch(100% 0 0 / 0.28), oklch(100% 0 0 / 0.04));
+  --vidrio-filo: light-dark(oklch(100% 0 0 / 0.9), oklch(100% 0 0 / 0.35));
+  isolation: isolate;
+  box-shadow:
+    0 4px 4px light-dark(oklch(0% 0 0 / 0.04), oklch(0% 0 0 / 0.15)),
+    0 0 12px oklch(0% 0 0 / 0.08),
+    0 0 24px oklch(100% 0 0 / 0.1);
+
+  &:where(:not(.absolute, .menu)) { position: relative; }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+  &::before {
+    backdrop-filter: var(--vidrio-filtro, blur(4px));
+    -webkit-backdrop-filter: var(--vidrio-filtro, blur(4px));
+    filter: url('#vidrio-liquido');
+  }
+  &::after {
+    background: var(--vidrio-tinte);
+    box-shadow:
+      inset 2px 2px 2px 0 var(--vidrio-filo),
+      inset -2px -2px 2px 0 var(--vidrio-filo);
+  }
+
+  /* Con menos transparencia o mas contraste, superficie opaca y sin distorsion. */
+  @media (prefers-reduced-transparency: reduce) or (prefers-contrast: more) {
+    --vidrio-tinte: var(--surface-card-opaco);
+    &::before { display: none; }
+  }
 }
-@utility glass-fuerte { background: var(--surface-card-elevated); }
+/* Sobre una foto: mas tinte. */
+@utility glass-fuerte {
+  @media not ((prefers-reduced-transparency: reduce) or (prefers-contrast: more)) {
+    --vidrio-tinte: light-dark(oklch(100% 0 0 / 0.78), oklch(0% 0 0 / 0.45));
+  }
+}
+/* Flota sobre la pagina: mas desenfoque, para que el texto de atras no compita. */
 @utility glass-denso {
-  background: var(--surface-raised);
-  backdrop-filter: var(--sheet-filter);
-  -webkit-backdrop-filter: var(--sheet-filter);
+  --vidrio-filtro: blur(24px);
+  @media not ((prefers-reduced-transparency: reduce) or (prefers-contrast: more)) {
+    --vidrio-tinte: light-dark(oklch(100% 0 0 / 0.45), oklch(0% 0 0 / 0.4));
+  }
 }
 
 /* Foto con borde de vidrio y grano encima. */
