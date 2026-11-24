@@ -207,7 +207,8 @@
 
 @layer base {
   body {
-    background: var(--bg-app);
+    /* Negro en el tema oscuro; en el claro, la base de siempre. */
+    background: light-dark(var(--bg-app), oklch(0% 0 0));
     color: var(--text-primary);
     font: var(--text-body);
     font-variant-numeric: tabular-nums;

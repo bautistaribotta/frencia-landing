@@ -1,9 +1,8 @@
 ---
 // Pagina para rutas que no existen. Cloudflare la sirve con estado 404
 // (not_found_handling: "404-page" en wrangler.jsonc). Usa las mismas piezas que
-// el inicio: fondo vivo, titulo y el boton de acento.
+// el inicio: fondo, titulo y el boton de acento.
 import Icono from '../components/Icono.astro';
-import GradienteVivo from '../components/GradienteVivo.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 
@@ -12,7 +11,6 @@ import Layout from '../layouts/Layout.astro';
   description="La página que buscás no existe. Volvé al inicio de Frencia para conocer la app."
   indexar={false}
 >
-  <GradienteVivo />
   <main
     id="contenido"
     tabindex="-1"

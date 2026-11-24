@@ -2,7 +2,6 @@
 import Aplicacion from '../components/Aplicacion.astro';
 import Barra from '../components/Barra.astro';
 import Contacto from '../components/Contacto.astro';
-import GradienteVivo from '../components/GradienteVivo.astro';
 import Hero from '../components/Hero.astro';
 import Historia from '../components/Historia.astro';
 import Layout from '../layouts/Layout.astro';
@@ -13,11 +12,10 @@ import Pie from '../components/Pie.astro';
   title="Frencia · App para registrar tus entrenamientos de gimnasio"
   description="Cargá tu rutina, registrá cada serie con RIR o RPE y seguí tu progreso. Frencia reemplaza el Excel del gimnasio sin decirte qué entrenar."
 >
-  <GradienteVivo />
   <Barra />
   <!-- overflow-clip y no hidden: recorta igual pero no crea un contenedor de
        scroll, que confundiria a scroll-target-group de la barra. -->
-  <div class="atenua relative z-1 overflow-clip">
+  <div class="relative z-1 overflow-clip">
     <main id="contenido" tabindex="-1" class="outline-none">
       <Hero />
       <Historia />
@@ -28,11 +26,3 @@ import Pie from '../components/Pie.astro';
   </div>
 </Layout>
 
-<style>
-  /* Las nubes bajan de brillo para que el texto se lea: un poco en el hero y
-     mas en el resto de la pagina. La capa crece de a poco, sin marcar cortes. */
-  .atenua {
-    --base: light-dark(var(--bg-app), oklch(0% 0 0));
-    background: linear-gradient(180deg, color-mix(in oklch, var(--base) 38%, transparent) 0, color-mix(in oklch, var(--base) 38%, transparent) 70svh, color-mix(in oklch, var(--base) 62%, transparent) 130svh);
-  }
-</style>
