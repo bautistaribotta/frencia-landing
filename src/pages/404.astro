@@ -1,7 +1,7 @@
 ---
 // Pagina para rutas que no existen. Cloudflare la sirve con estado 404
 // (not_found_handling: "404-page" en wrangler.jsonc). Usa las mismas piezas que
-// el inicio: fondo vivo, rotulo, titulo y el boton de acento.
+// el inicio: fondo vivo, titulo y el boton de acento.
 import { ArrowLeft } from '@lucide/astro';
 import GradienteVivo from '../components/GradienteVivo.astro';
 import Layout from '../layouts/Layout.astro';
@@ -19,7 +19,6 @@ import Layout from '../layouts/Layout.astro';
     class="relative z-1 mx-auto flex min-h-svh w-full max-w-(--contenido-max) flex-col justify-center gap-7 px-(--pad-pagina) py-20 outline-none max-[900px]:px-5"
   >
     <a class="marca no-underline" href="/" aria-label="Frencia, inicio">FRENCIA.</a>
-    <p class="rotulo">Error 404</p>
     <h1 class="titulo-seccion max-w-[20ch]">Esta página no existe.</h1>
     <p class="bajada">Puede que el enlace esté mal escrito o que la página se haya movido.</p>
     <a

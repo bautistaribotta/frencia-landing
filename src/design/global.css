@@ -126,7 +126,7 @@
 @utility type-label { font: var(--text-label); letter-spacing: var(--ls-wider); text-transform: uppercase; }
 @utility type-meta { font: var(--text-meta); }
 
-/* Rotulo: etiqueta corta en mayusculas sobre titulos y columnas. */
+/* Rotulo: etiqueta corta en mayusculas para columnas y datos. No va sobre titulos. */
 @utility rotulo {
   font: var(--text-label);
   font-family: var(--fuente-semi);
